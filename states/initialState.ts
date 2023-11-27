@@ -5,7 +5,6 @@ export const initialState: ApplicationData = {
   binNumber: '',
   commissioneRate: '',
   division: '',
-  subDivision: '',
   circle: '',
   shopName: '',
   brandName: '',

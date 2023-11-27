@@ -3,7 +3,6 @@ export interface ApplicationData {
   binNumber: string;
   commissioneRate: string;
   division: string;
-  subDivision: string;
   circle: string;
   shopName: string;
   brandName: string;

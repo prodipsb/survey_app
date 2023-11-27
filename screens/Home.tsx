@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import {View, Image, FlatList, TouchableOpacity} from 'react-native';
 import React, {useState, useEffect} from 'react';
 import MenuDrawer from 'react-native-side-drawer';
@@ -8,16 +9,19 @@ import {Bars3Icon} from 'react-native-heroicons/solid';
 import TextComponent from '../components/ui/TextComponent';
 import {ScreenType} from '../components/types/screenComponentsType';
 import {SafeAreaView} from 'react-native-safe-area-context';
-import PushNotification from "react-native-push-notification";
-import { UserResponse } from '../utils/userresponse';
+import PushNotification from 'react-native-push-notification';
+import {UserResponse} from '../utils/userresponse';
 import axios from 'axios';
 
 import Config from 'react-native-config';
-import { notificationListener, requestUserPermission } from '../utils/notificationUtils';
-import { Text } from 'react-native-svg';
-import { getAuthData } from '../utils/asyncStorage';
+import {
+  notificationListener,
+  requestUserPermission,
+} from '../utils/notificationUtils';
+import {Text} from 'react-native-svg';
+import {getAuthData} from '../utils/asyncStorage';
 import FlatListComponent from '../components/ui/FlatListComponent';
-import { get } from '../utils/ApiCaller';
+import {get} from '../utils/ApiCaller';
 const API = Config.APP_ENDPOINT;
 
 type ItemData = {
@@ -34,7 +38,6 @@ const DATA: ItemData[] = [
     name: 'Monthly Submitted',
     count: 12,
   },
- 
 ];
 
 const Home: React.FC<ScreenType> = ({setUser, user}) => {
@@ -47,50 +50,43 @@ const Home: React.FC<ScreenType> = ({setUser, user}) => {
   useEffect(() => {
     requestUserPermission();
     notificationListener();
-  }, [])
+  }, []);
 
   React.useEffect(() => {
-
     PushNotification.configure({
       // (optional) Called when Token is generated (iOS and Android)
-      onRegister: function(token) {
-        console.log("TOKEN:", token);
+      onRegister: function (token) {
+        console.log('TOKEN:', token);
         setDeviceToken(token);
-        
       },
-    
+
       // (required) Called when a remote or local notification is opened or received
-      onNotification: function(notification) {
-        console.log("NOTIFICATION:", notification);
-    
+      onNotification: function (notification) {
+        console.log('NOTIFICATION:', notification);
+
         // process the notification here
-    
-        // required on iOS only 
-       // notification.finish(PushNotificationIOS.FetchResult.NoData);
+
+        // required on iOS only
+        // notification.finish(PushNotificationIOS.FetchResult.NoData);
       },
       // Android only
-      senderID: "760559770443",
+      senderID: '760559770443',
       // iOS only
       permissions: {
         alert: true,
         badge: true,
-        sound: true
+        sound: true,
       },
       popInitialNotification: true,
-      requestPermissions: true
+      requestPermissions: true,
     });
-
-
-  }, [])
-
+  }, []);
 
   useEffect(() => {
     const getProfile = async () => {
       try {
-
         const authData = await getAuthData();
         setProfileInfo(authData);
-
       } catch (err) {
         console.log('user profile err', err);
       }
@@ -100,30 +96,26 @@ const Home: React.FC<ScreenType> = ({setUser, user}) => {
     getDashboardStats();
   }, []);
 
-
   const getDashboardStats = async () => {
     try {
-
       const {data} = await get('dashboard');
       setStats(data.data.stats);
-    
     } catch (err) {
-      console.log('user stats err ', err)
+      console.log('user stats err ', err);
     }
   };
-
 
   const userDeviceTokenStore = async () => {
     try {
       let formdata = new FormData();
 
-      formdata.append("user_id", profileInfo?.id)
-      formdata.append("user", profileInfo?.name)
-      formdata.append("device_token", deviceToken?.token)
+      formdata.append('user_id', profileInfo?.id);
+      formdata.append('user', profileInfo?.name);
+      formdata.append('device_token', deviceToken?.token);
 
       const {data} = await axios.post(API + '/store/device-tokens', formdata, {
         headers: {
-          'Accept': 'application/json',
+          Accept: 'application/json',
           'Content-Type': 'multipart/form-data',
           Authorization: `Bearer ${user?.access_token}`,
         },
@@ -133,11 +125,9 @@ const Home: React.FC<ScreenType> = ({setUser, user}) => {
         console.log('user device store api call', data);
       }
     } catch (err) {
-      console.log('user token store err ', err)
+      console.log('user token store err ', err);
     }
   };
-
-
 
   return (
     <SafeAreaView className="h-screen w-screen flex-1 bg-slate-200">
@@ -168,11 +158,8 @@ const Home: React.FC<ScreenType> = ({setUser, user}) => {
                 style="text-[20px] text-black font-thin my-6"
               />
 
-              <FlatListComponent
-                data = {stats}
-              />
+              <FlatListComponent data={stats} />
 
-             
               <Image
                 source={require('../assets/homepage.png')}
                 className="h-[65%] w-full"

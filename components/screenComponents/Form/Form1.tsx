@@ -37,6 +37,7 @@ const Form1: React.FC<FormType> = ({preview, dispatch, state, errorData}) => {
           preview={preview}
           type="binRegex"
           errorData={errorData}
+          keyboardType="number-pad"
         />
       </View>
       <View className="w-full mt-5 mb-3">
@@ -54,39 +55,24 @@ const Form1: React.FC<FormType> = ({preview, dispatch, state, errorData}) => {
           errorData={errorData}
         />
       </View>
-      <View className="w-full mt-5 mb-3">
-        <TextComponent
-          style="text-[18px] text-black"
-          content="Select division"
-        />
-        <DropdownComponents
-          defaultValue={state.division}
-          name="division"
-          handleSelect={dispatch}
-          data={commisionerate}
-          search={false}
-          preview={preview}
-          errorData={errorData}
-        />
-      </View>
-      {state.division && (
+      {state.commissioneRate && (
         <View className="w-full mt-5 mb-3">
           <TextComponent
             style="text-[18px] text-black"
-            content="Select sub-division"
+            content="Select division"
           />
           <DropdownComponents
-            defaultValue={state?.subDivision}
-            name="subDivision"
+            defaultValue={state?.division}
+            name="division"
             handleSelect={dispatch}
-            data={subdivision[state?.division]}
+            data={subdivision[state?.commissioneRate]}
             search={true}
             preview={preview}
             errorData={errorData}
           />
         </View>
       )}
-      {state.subDivision && (
+      {state.division && (
         <View className="w-full mt-5 mb-3">
           <TextComponent
             style="text-[18px] text-black"
@@ -96,7 +82,7 @@ const Form1: React.FC<FormType> = ({preview, dispatch, state, errorData}) => {
             defaultValue={state.circle}
             name="circle"
             handleSelect={dispatch}
-            data={circle[state.subDivision]}
+            data={circle[state.division]}
             preview={preview}
             search={false}
             errorData={errorData}
@@ -201,6 +187,7 @@ const Form1: React.FC<FormType> = ({preview, dispatch, state, errorData}) => {
           preview={preview}
           keyboardType="number-pad"
           errorData={errorData}
+          optional={true}
         />
       </View>
       <View className="w-full mb-3 mt-5">
@@ -226,7 +213,7 @@ const Form1: React.FC<FormType> = ({preview, dispatch, state, errorData}) => {
         />
         <InputComponent
           style="text-[18px] text-black border-b"
-          placeholder="01XXXXXXXXX"
+          placeholder="8801XXXXXXXXX"
           handleChange={dispatch}
           name="binHolderMobile"
           defaultValue={state.binHolderMobile}

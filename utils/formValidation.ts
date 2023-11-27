@@ -61,6 +61,7 @@ export const validation = (state: ApplicationData): string => {
   }
 
   const excludedFields = [
+    'binHolderNid',
     'brandName',
     'nrbApproved',
     'thirdPartyName',

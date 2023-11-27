@@ -5,14 +5,14 @@ export const reducer = (state: ApplicationData, action: any) => {
   switch (action.type) {
     case actionTypes.INPUT:
       switch (action.payload.name) {
-        case 'division':
+        case 'commissioneRate':
           return {
             ...state,
             [action.payload.name]: action.payload.value,
-            ['subDivision']: '',
+            ['division']: '',
             ['circle']: '',
           };
-        case 'subDivision':
+        case 'division':
           return {
             ...state,
             [action.payload.name]: action.payload.value,

@@ -43,24 +43,22 @@ const InputComponent: React.FC<InputTextProp> = ({
         }
       }
       case 'binRegex': {
-        if (
-          e !== '' &&
-          e.toString().length <= 9 &&
-          !nineDigit.test(String(e))
-        ) {
-          return seterror('Only accept this 123456789-9875 format');
-        } else if (
-          e !== '' &&
-          e.toString().length === 10 &&
-          e.toString().charAt(9) !== '-'
-        ) {
-          return seterror('Only accept this 123456789-9875 format');
-        } else if (e !== '' && e.toString().length === 15) {
+        if (e !== '' && e.toString().length > 14) {
           return seterror('');
-        } else if (e !== '' && !numberhiphen.test(String(e))) {
-          return seterror('Only accept this 123456789-9875 format');
         } else {
-          seterror('');
+          if (e.toString().length === 14 && !e.toString().includes('-')) {
+            e = String(e);
+            return (
+              handleChange &&
+              handleChange({
+                type: 'INPUT',
+                payload: {
+                  name: fieldName,
+                  value: e.slice(0, 9) + '-' + e.slice(9),
+                },
+              })
+            );
+          }
           return (
             handleChange &&
             handleChange({
@@ -85,14 +83,14 @@ const InputComponent: React.FC<InputTextProp> = ({
         }
       }
       case 'mobile': {
-        if (e.toString().length === 1 && e.toString() !== '0') {
-          return seterror('Acceptable format: 01XXXXXXXXX');
-        } else if (e.toString().length === 2 && e.toString() !== '01') {
-          return seterror('Acceptable format: 01XXXXXXXXX');
-        } else if (e !== '' && e.toString().length === 12) {
+        if (e.toString().length === 1 && e.toString() !== '8') {
+          return seterror('Acceptable format: 8801XXXXXXXXX');
+        } else if (e.toString().length === 2 && e.toString() !== '88') {
+          return seterror('Acceptable format: 8801XXXXXXXXX');
+        } else if (e !== '' && e.toString().length === 14) {
           return seterror('');
         } else if (e !== '' && !digituptoEleven.test(String(e))) {
-          return seterror('Only accept 11 digit');
+          return seterror('Only accept 13 digit');
         } else {
           seterror('');
           return (
