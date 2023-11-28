@@ -20,11 +20,11 @@ const FlatListComponent: React.FC<FlatListComponentProps> = ({data}) => {
           className="bg-white py-3 w-[160px] rounded-md">
           <TextComponent
             content={itemData?.name}
-            style="text-[16px] text-center"
+            style="text-[14px] text-center text-black"
           />
           <TextComponent
             content={itemData?.count}
-            style="text-[18px] text-center pt-1"
+            style="text-[14px] text-center text-black pt-1"
           />
         </TouchableOpacity>
       ))}

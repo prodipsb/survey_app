@@ -7,7 +7,7 @@ import Home from './screens/Home';
 import {RootParamList} from './utils/navigationtype';
 import Profile from './screens/Profile';
 import {UserType, getData} from './utils/asyncStorage';
-import {Alert, StatusBar, View} from 'react-native';
+import {Alert, StatusBar, View, Modal} from 'react-native';
 import Spinner from 'react-native-spinkit';
 import {ToastProvider} from 'react-native-toast-notifications';
 import TextComponent from './components/ui/TextComponent';
@@ -19,10 +19,18 @@ const Stack = createNativeStackNavigator<RootParamList>();
 export default function App() {
   const [user, setUser] = React.useState<UserType | null>(null);
   const [loading, setLoading] = React.useState<boolean>(true);
+  const [modalVisible, setModalVisible] = useState(false);
 
   useEffect(() => {
     const unsubscribe = messaging().onMessage(async remoteMessage => {
-      Alert.alert('A new message arrived!', JSON.stringify(remoteMessage));
+
+      const { data } = remoteMessage;
+      const title = data.title;
+      const message = data.message;
+    
+      Alert.alert('A New Message Arrived', `${title}\n\n${message}`);      
+
+
     });
 
     return unsubscribe;
@@ -44,6 +52,23 @@ export default function App() {
     fetchData();
   }, []);
 
+
+  const CustomAlert = (props) => {
+    return (
+      <Modal
+          animationType="fade"
+          transparent={true}
+          visible={props.modalVisible}
+          onRequestClose={() => {
+            props.setModalVisible(false);
+          }}
+        >
+          <View>
+  
+          </View>
+        </Modal>
+    )
+  }
 
 
 
@@ -86,6 +111,7 @@ export default function App() {
           </View>
         ),
       }}>
+        <CustomAlert modalVisible={modalVisible} setModalVisible={setModalVisible} />
       <NavigationContainer>
         <StatusBar
           translucent

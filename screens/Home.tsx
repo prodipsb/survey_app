@@ -24,6 +24,7 @@ import FlatListComponent from '../components/ui/FlatListComponent';
 import {get} from '../utils/ApiCaller';
 import {Toast} from 'react-native-toast-notifications';
 const API = Config.APP_ENDPOINT;
+const NOTIFICATION_SENDER_ID = Config.APP_NOTIFICATION_SENDER_ID;
 
 const Home: React.FC<ScreenType> = ({setUser, user}) => {
   const [open, setOpen] = useState<boolean>(false);
@@ -47,7 +48,7 @@ const Home: React.FC<ScreenType> = ({setUser, user}) => {
         // required on iOS only
         // notification.finish(PushNotificationIOS.FetchResult.NoData);
       },
-      senderID: '760559770443',
+      senderID: NOTIFICATION_SENDER_ID,
       permissions: {
         alert: true,
         badge: true,
@@ -116,6 +117,7 @@ const Home: React.FC<ScreenType> = ({setUser, user}) => {
       console.log('user token store err ', err);
     }
   };
+
 
   return (
     <SafeAreaView className="h-screen w-screen flex-1 bg-slate-200">
