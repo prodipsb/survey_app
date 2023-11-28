@@ -12,15 +12,13 @@ import PressableComponent from '../components/ui/PressableComponent';
 import TouchableOpacityComponent from '../components/ui/TouchableOpacityComponent';
 import InputComponent from '../components/ui/InputComponent';
 import {digituptoSix, emailExactRegex} from '../sampleData/regexdata';
-import {storeAuthData, storeData} from '../utils/asyncStorage';
+import {storeData} from '../utils/asyncStorage';
 import {ScreenType} from '../components/types/screenComponentsType';
 import {useToast} from 'react-native-toast-notifications';
 import Animated, {FadeInUp} from 'react-native-reanimated';
 import {login} from '../utils/ApiCaller';
-import {useNavigation} from '@react-navigation/native';
 
 const Login: React.FC<ScreenType> = ({setUser}) => {
-  const navigation = useNavigation();
   const [showPassword, setShowPassword] = useState<boolean>(true);
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
@@ -48,7 +46,6 @@ const Login: React.FC<ScreenType> = ({setUser}) => {
       .then(response => {
         if (response?.data?.access_token) {
           storeData(response?.data);
-          storeAuthData(response?.data?.user);
           setUser(response?.data);
         }
       })

@@ -44,8 +44,14 @@ export type DeviceTokenType = {
   token: string;
 };
 
-export type ProfileInfoType = {
+export interface ProfileInfo {
   avatar: string;
   id: number;
   name: string;
-};
+}
+
+export interface UserType {
+  token_type: string;
+  access_token: string;
+  user: ProfileInfo;
+}

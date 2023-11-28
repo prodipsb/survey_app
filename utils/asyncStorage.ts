@@ -1,10 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {ProfileInfoType} from './userresponse';
-
-export interface UserType {
-  token_type: string;
-  access_token: string;
-}
+import {UserType} from './userresponse';
 
 export const storeData = async (userData: UserType): Promise<void> => {
   try {
@@ -30,26 +25,10 @@ export const getData = async (): Promise<UserType | null> => {
   }
 };
 
-export const storeAuthData = async (userData: UserType): Promise<void> => {
+export const removeData = async (): Promise<void> => {
   try {
-    const jsonValue = JSON.stringify(userData);
-    await AsyncStorage.setItem('authData', jsonValue);
+    await AsyncStorage.removeItem('userData');
   } catch (e) {
     console.error(e);
-  }
-};
-
-export const getAuthData = async (): Promise<ProfileInfoType | null> => {
-  try {
-    const value = await AsyncStorage.getItem('authData');
-    if (value !== null) {
-      const authData = JSON.parse(value);
-      return authData;
-    } else {
-      return null;
-    }
-  } catch (e) {
-    console.error(e);
-    throw e;
   }
 };

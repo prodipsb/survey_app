@@ -17,6 +17,8 @@ import Spinner from 'react-native-loading-spinner-overlay';
 import {useToast} from 'react-native-toast-notifications';
 
 import Config from 'react-native-config';
+import {get} from '../utils/ApiCaller';
+import {removeData} from '../utils/asyncStorage';
 const API = Config.APP_ENDPOINT;
 const IMGAPI = Config.APP_IMAGE_URL;
 
@@ -29,24 +31,23 @@ const Profile: React.FC<ScreenType> = ({setUser, user}) => {
   const toast = useToast();
 
   useEffect(() => {
-    const getProfile = async () => {
-      try {
-        const {data} = await axios.get(API + '/profile', {
-          headers: {
-            'Content-Type': 'multipart/form-data',
-            Authorization: `Bearer ${user?.access_token}`,
-          },
-        });
-        if (data) {
-          setProfileInfo(data.data);
+    const getprofile = async () => {
+      await get('profile')
+        .then(response => {
+          if (response) {
+            setProfileInfo(response?.data);
+            setLoading(false);
+          }
+        })
+        .catch(err => {
+          if (err?.response?.status === 401) {
+            removeData();
+            setUser(null);
+          }
           setLoading(false);
-        }
-      } catch (err) {
-        console.log(err);
-        setLoading(false);
-      }
+        });
     };
-    getProfile();
+    getprofile();
   }, []);
 
   const updateImage = async () => {
@@ -72,10 +73,15 @@ const Profile: React.FC<ScreenType> = ({setUser, user}) => {
         setProfileInfo(update);
         setLoading(false);
       }
-    } catch (err) {
-      toast.show('Something went wrong...', {
-        type: 'custom_error',
-      });
+    } catch (err: any) {
+      if (err?.response?.status) {
+        removeData();
+        setUser(null);
+      } else {
+        toast.show('Something went wrong...', {
+          type: 'custom_error',
+        });
+      }
       setLoading(false);
     }
   };

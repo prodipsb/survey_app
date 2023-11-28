@@ -5,8 +5,6 @@ import TextComponent from './TextComponent';
 import {
   alphanumericAndSymbol,
   digituptoEleven,
-  nineDigit,
-  numberhiphen,
   numericSymbol,
 } from '../../sampleData/regexdata';
 

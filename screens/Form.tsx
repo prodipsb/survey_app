@@ -15,7 +15,6 @@ import MenuDrawer from 'react-native-side-drawer';
 import Sidebar from '../components/screenComponents/sidebar/Sidebar';
 import {drawerStyles} from '../utils/drawerStyle';
 import {ScreenType} from '../components/types/screenComponentsType';
-// import {API} from '../utils/endpoint';
 import axios from 'axios';
 import {createFormData} from '../utils/createFormdata';
 import Spinner from 'react-native-loading-spinner-overlay';
@@ -25,6 +24,7 @@ import {NavigationType} from '../utils/navigationtype';
 import {SafeAreaView} from 'react-native-safe-area-context';
 
 import Config from 'react-native-config';
+import {removeData} from '../utils/asyncStorage';
 const API = Config.APP_ENDPOINT;
 
 const Form: React.FC<ScreenType> = ({setUser, user}) => {
@@ -96,12 +96,16 @@ const Form: React.FC<ScreenType> = ({setUser, user}) => {
         });
         navigation.push('home');
       }
-    } catch (err) {
+    } catch (err: any) {
+      if (err?.response?.status) {
+        removeData();
+        setUser(null);
+      } else {
+        toast.show(err, {
+          type: 'custom_error',
+        });
+      }
       setLoading(false);
-      console.log('survey form submitted err', err);
-      toast.show(`${err}`, {
-        type: 'custom_error',
-      });
     }
   };
 

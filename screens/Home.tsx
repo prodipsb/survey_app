@@ -11,11 +11,7 @@ import TextComponent from '../components/ui/TextComponent';
 import {ScreenType} from '../components/types/screenComponentsType';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import PushNotification from 'react-native-push-notification';
-import {
-  DeviceTokenType,
-  ProfileInfoType,
-  SubmitInfo,
-} from '../utils/userresponse';
+import {DeviceTokenType, ProfileInfo, SubmitInfo} from '../utils/userresponse';
 import axios from 'axios';
 
 import Config from 'react-native-config';
@@ -23,14 +19,15 @@ import {
   notificationListener,
   requestUserPermission,
 } from '../utils/notificationUtils';
-import {getAuthData} from '../utils/asyncStorage';
+import {getData, removeData} from '../utils/asyncStorage';
 import FlatListComponent from '../components/ui/FlatListComponent';
 import {get} from '../utils/ApiCaller';
+import {Toast} from 'react-native-toast-notifications';
 const API = Config.APP_ENDPOINT;
 
 const Home: React.FC<ScreenType> = ({setUser, user}) => {
   const [open, setOpen] = useState<boolean>(false);
-  const [profileInfo, setProfileInfo] = useState<ProfileInfoType | null>();
+  const [profileInfo, setProfileInfo] = useState<ProfileInfo | null>();
   const [deviceToken, setDeviceToken] = useState<DeviceTokenType | null>();
   const [userSubmitInfo, setUserSubmitInfo] = useState<SubmitInfo[] | null>();
 
@@ -64,10 +61,13 @@ const Home: React.FC<ScreenType> = ({setUser, user}) => {
   useEffect(() => {
     const getProfile = async () => {
       try {
-        const profileData = await getAuthData();
-        setProfileInfo(profileData);
-      } catch (err) {
-        console.log('user profile err', err);
+        const profileData = await getData();
+        setProfileInfo(profileData?.user);
+      } catch (err: any) {
+        if (err?.response?.status) {
+          removeData();
+          setUser(null);
+        }
       }
     };
     getProfile();
@@ -78,27 +78,36 @@ const Home: React.FC<ScreenType> = ({setUser, user}) => {
   const getDashboardStats = async () => {
     try {
       const {data} = await get('dashboard');
-      setUserSubmitInfo(data.data.stats);
-    } catch (err) {
-      console.log('user stats err ', err);
+      setUserSubmitInfo(data?.stats);
+    } catch (err: any) {
+      if (err?.response?.status) {
+        removeData();
+        setUser(null);
+      } else {
+        Toast.show('Unauthorized user...', {
+          type: 'custom_error',
+        });
+      }
     }
   };
 
   const userDeviceTokenStore = async () => {
     try {
-      let formdata = new FormData();
-
-      formdata.append('user_id', profileInfo?.id);
-      formdata.append('user', profileInfo?.name);
-      formdata.append('device_token', deviceToken?.token);
-
-      const {data} = await axios.post(API + '/store/device-tokens', formdata, {
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'multipart/form-data',
-          Authorization: `Bearer ${user?.access_token}`,
+      const {data} = await axios.post(
+        API + '/store/device-tokens',
+        {
+          user_id: profileInfo?.id,
+          user: profileInfo?.name,
+          device_token: deviceToken?.token,
         },
-      });
+        {
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'multipart/form-data',
+            Authorization: `Bearer ${user?.access_token}`,
+          },
+        },
+      );
 
       if (data) {
         console.log('user device store api call', data);
