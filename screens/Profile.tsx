@@ -74,7 +74,7 @@ const Profile: React.FC<ScreenType> = ({setUser, user}) => {
         setLoading(false);
       }
     } catch (err: any) {
-      if (err?.response?.status) {
+      if (err?.response?.status === 401) {
         removeData();
         setUser(null);
       } else {

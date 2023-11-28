@@ -10,13 +10,13 @@ import {
 import TextComponent from '../../ui/TextComponent';
 import {useNavigation} from '@react-navigation/native';
 import {NavigationType} from '../../../utils/navigationtype';
-import {UserType} from '../../../utils/asyncStorage';
+import {removeData} from '../../../utils/asyncStorage';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
-// import {API} from '../../../utils/endpoint';
 import {useToast} from 'react-native-toast-notifications';
 
 import Config from 'react-native-config';
+import {UserType} from '../../../utils/userresponse';
 const API = Config.APP_ENDPOINT;
 
 interface SidebarType {
@@ -31,24 +31,25 @@ const Sidebar: React.FC<SidebarType> = ({setOpen, user, setUser}) => {
 
   const handleLogout = async (): Promise<void> => {
     try {
-      const {data} = await axios.post(
-        API + '/logout',
-        {},
-        {
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${user?.access_token}`,
-          },
+      const {data} = await axios.post(API + '/logout', {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${user?.access_token}`,
         },
-      );
+      });
       if (data) {
         await AsyncStorage.removeItem('userData');
         setUser(null);
       }
-    } catch (err) {
-      toast.show('Something went wrong...', {
-        type: 'custom_error',
-      });
+    } catch (err: any) {
+      if (err?.response?.status === 401) {
+        removeData();
+        setUser(null);
+      } else {
+        toast.show('Something went wrong...', {
+          type: 'custom_error',
+        });
+      }
     }
   };
 

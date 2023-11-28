@@ -97,7 +97,7 @@ const Form: React.FC<ScreenType> = ({setUser, user}) => {
         navigation.push('home');
       }
     } catch (err: any) {
-      if (err?.response?.status) {
+      if (err?.response?.status === 401) {
         removeData();
         setUser(null);
       } else {

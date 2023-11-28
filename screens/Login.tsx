@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable handle-callback-err */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import {Image, KeyboardAvoidingView, StatusBar, View} from 'react-native';
@@ -17,11 +18,16 @@ import {ScreenType} from '../components/types/screenComponentsType';
 import {useToast} from 'react-native-toast-notifications';
 import Animated, {FadeInUp} from 'react-native-reanimated';
 import {login} from '../utils/ApiCaller';
+import PushNotification from 'react-native-push-notification';
+import Config from 'react-native-config';
+import {DeviceTokenType, UserType} from '../utils/userresponse';
+import axios from 'axios';
 
 const Login: React.FC<ScreenType> = ({setUser}) => {
   const [showPassword, setShowPassword] = useState<boolean>(true);
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
+  const [deviceToken, setDeviceToken] = useState<DeviceTokenType | null>();
   const [validationError, setValidationError] = useState<{
     email: string;
     password: string;
@@ -29,11 +35,32 @@ const Login: React.FC<ScreenType> = ({setUser}) => {
     email: '',
     password: '',
   });
+
   const toast = useToast();
+
+  const NOTIFICATION_SENDER_ID = Config.APP_NOTIFICATION_SENDER_ID;
+  const API = Config.APP_ENDPOINT;
 
   const togglePassword = () => {
     setShowPassword(!showPassword);
   };
+
+  useEffect(() => {
+    PushNotification.configure({
+      onRegister: function (token) {
+        setDeviceToken(token);
+      },
+      onNotification: function (notification) {},
+      senderID: NOTIFICATION_SENDER_ID,
+      permissions: {
+        alert: true,
+        badge: true,
+        sound: true,
+      },
+      popInitialNotification: true,
+      requestPermissions: true,
+    });
+  }, []);
 
   const request = async () => {
     const payload = {
@@ -45,8 +72,7 @@ const Login: React.FC<ScreenType> = ({setUser}) => {
     await login('auth-login', payload)
       .then(response => {
         if (response?.data?.access_token) {
-          storeData(response?.data);
-          setUser(response?.data);
+          userDeviceTokenStore(response?.data);
         }
       })
       .catch(err => {
@@ -105,6 +131,36 @@ const Login: React.FC<ScreenType> = ({setUser}) => {
       }));
     }
   }, [email, password]);
+
+  const userDeviceTokenStore = async (profileInfo: UserType) => {
+    try {
+      const {data} = await axios.post(
+        API + '/store/device-tokens',
+        {
+          user_id: profileInfo?.user?.id,
+          user: profileInfo?.user?.name,
+          device_token: deviceToken?.token,
+        },
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${profileInfo?.access_token}`,
+          },
+        },
+      );
+
+      if (data) {
+        if (data?.code === 200) {
+          storeData(profileInfo);
+          setUser(profileInfo);
+        }
+      }
+    } catch (err) {
+      toast.show('Unauthorized user...', {
+        type: 'custom_error',
+      });
+    }
+  };
 
   return (
     <View className="flex-1 relative h-screen w-screen bg-blue-500">
