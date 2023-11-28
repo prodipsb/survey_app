@@ -83,7 +83,7 @@ const Form: React.FC<ScreenType> = ({setUser, user}) => {
       const formData = createFormData(state);
       const {data} = await axios.post(API + '/survey-submission', formData, {
         headers: {
-          'Accept': 'application/json',
+          Accept: 'application/json',
           'Content-Type': 'multipart/form-data',
           Authorization: `Bearer ${user?.access_token}`,
         },
@@ -98,7 +98,7 @@ const Form: React.FC<ScreenType> = ({setUser, user}) => {
       }
     } catch (err) {
       setLoading(false);
-      console.log('survey form submitted err', err)
+      console.log('survey form submitted err', err);
       toast.show(`${err}`, {
         type: 'custom_error',
       });

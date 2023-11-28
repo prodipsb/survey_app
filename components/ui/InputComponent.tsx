@@ -43,29 +43,34 @@ const InputComponent: React.FC<InputTextProp> = ({
         }
       }
       case 'binRegex': {
-        if (e !== '' && e.toString().length > 14) {
+        e = String(e);
+        if (e.length >= 9 && !e.includes('-')) {
+          e = e.slice(0, 9) + '-' + e.slice(9);
+        }
+        if (e !== '' && e.length > 14) {
           return seterror('');
         } else {
-          if (e.toString().length === 14 && !e.toString().includes('-')) {
-            e = String(e);
+          if (e.length === 9) {
+            e += '-';
             return (
               handleChange &&
               handleChange({
                 type: 'INPUT',
                 payload: {
                   name: fieldName,
-                  value: e.slice(0, 9) + '-' + e.slice(9),
+                  value: e,
                 },
               })
             );
+          } else {
+            return (
+              handleChange &&
+              handleChange({
+                type: 'INPUT',
+                payload: {name: fieldName, value: e},
+              })
+            );
           }
-          return (
-            handleChange &&
-            handleChange({
-              type: 'INPUT',
-              payload: {name: fieldName, value: e},
-            })
-          );
         }
       }
       case 'alphanumericAndSymbol': {

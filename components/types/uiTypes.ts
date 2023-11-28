@@ -9,11 +9,6 @@ export type PropsType = {
   handlePress?: () => void;
 };
 
-export type FlatListPropsType = {
-  data?: string | number | null | Element;
-  handlePress?: () => void;
-};
-
 export type InputTextProp = {
   placeholder: string;
   style: string;

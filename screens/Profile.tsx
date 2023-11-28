@@ -9,7 +9,6 @@ import {Bars3Icon} from 'react-native-heroicons/solid';
 import TextComponent from '../components/ui/TextComponent';
 import {ScreenType} from '../components/types/screenComponentsType';
 import axios from 'axios';
-// import {API, IMGAPI} from '../utils/endpoint';
 import {UserResponse} from '../utils/userresponse';
 import TouchableOpacityComponent from '../components/ui/TouchableOpacityComponent';
 import {SafeAreaView} from 'react-native-safe-area-context';

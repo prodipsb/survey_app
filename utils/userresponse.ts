@@ -1,3 +1,5 @@
+import {type} from 'os';
+
 export interface UserResponse {
   id: number;
   name: string;
@@ -31,3 +33,19 @@ export interface UserResponse {
     updated_at: string;
   };
 }
+
+export type SubmitInfo = {
+  count: number;
+  name: string;
+};
+
+export type DeviceTokenType = {
+  os: string;
+  token: string;
+};
+
+export type ProfileInfoType = {
+  avatar: string;
+  id: number;
+  name: string;
+};

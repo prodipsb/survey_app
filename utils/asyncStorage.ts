@@ -1,4 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {ProfileInfoType} from './userresponse';
 
 export interface UserType {
   token_type: string;
@@ -13,7 +14,6 @@ export const storeData = async (userData: UserType): Promise<void> => {
     console.error(e);
   }
 };
-
 
 export const getData = async (): Promise<UserType | null> => {
   try {
@@ -30,7 +30,6 @@ export const getData = async (): Promise<UserType | null> => {
   }
 };
 
-
 export const storeAuthData = async (userData: UserType): Promise<void> => {
   try {
     const jsonValue = JSON.stringify(userData);
@@ -40,11 +39,11 @@ export const storeAuthData = async (userData: UserType): Promise<void> => {
   }
 };
 
-export const getAuthData = async (): Promise<UserType | null> => {
+export const getAuthData = async (): Promise<ProfileInfoType | null> => {
   try {
     const value = await AsyncStorage.getItem('authData');
     if (value !== null) {
-      const authData = JSON.parse(value) as UserType;
+      const authData = JSON.parse(value);
       return authData;
     } else {
       return null;
@@ -54,4 +53,3 @@ export const getAuthData = async (): Promise<UserType | null> => {
     throw e;
   }
 };
-

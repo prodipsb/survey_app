@@ -1,5 +1,6 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable react-hooks/exhaustive-deps */
-import {View, Image, FlatList, TouchableOpacity} from 'react-native';
+import {View, Image} from 'react-native';
 import React, {useState, useEffect} from 'react';
 import MenuDrawer from 'react-native-side-drawer';
 import {drawerStyles} from '../utils/drawerStyle';
@@ -10,7 +11,11 @@ import TextComponent from '../components/ui/TextComponent';
 import {ScreenType} from '../components/types/screenComponentsType';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import PushNotification from 'react-native-push-notification';
-import {UserResponse} from '../utils/userresponse';
+import {
+  DeviceTokenType,
+  ProfileInfoType,
+  SubmitInfo,
+} from '../utils/userresponse';
 import axios from 'axios';
 
 import Config from 'react-native-config';
@@ -18,34 +23,16 @@ import {
   notificationListener,
   requestUserPermission,
 } from '../utils/notificationUtils';
-import {Text} from 'react-native-svg';
 import {getAuthData} from '../utils/asyncStorage';
 import FlatListComponent from '../components/ui/FlatListComponent';
 import {get} from '../utils/ApiCaller';
 const API = Config.APP_ENDPOINT;
 
-type ItemData = {
-  name: string;
-  count: number;
-};
-
-const DATA: ItemData[] = [
-  {
-    name: 'Today Submitted',
-    count: 0,
-  },
-  {
-    name: 'Monthly Submitted',
-    count: 12,
-  },
-];
-
 const Home: React.FC<ScreenType> = ({setUser, user}) => {
   const [open, setOpen] = useState<boolean>(false);
-  const [profileInfo, setProfileInfo] = useState<UserResponse | null>();
-  const [deviceToken, setDeviceToken] = useState<UserResponse | null>();
-  const [selectedId, setSelectedId] = useState<string>();
-  const [stats, setStats] = useState<UserResponse>();
+  const [profileInfo, setProfileInfo] = useState<ProfileInfoType | null>();
+  const [deviceToken, setDeviceToken] = useState<DeviceTokenType | null>();
+  const [userSubmitInfo, setUserSubmitInfo] = useState<SubmitInfo[] | null>();
 
   useEffect(() => {
     requestUserPermission();
@@ -54,24 +41,16 @@ const Home: React.FC<ScreenType> = ({setUser, user}) => {
 
   React.useEffect(() => {
     PushNotification.configure({
-      // (optional) Called when Token is generated (iOS and Android)
       onRegister: function (token) {
-        console.log('TOKEN:', token);
         setDeviceToken(token);
       },
-
-      // (required) Called when a remote or local notification is opened or received
       onNotification: function (notification) {
-        console.log('NOTIFICATION:', notification);
-
+        // console.log('NOTIFICATION:', notification);
         // process the notification here
-
         // required on iOS only
         // notification.finish(PushNotificationIOS.FetchResult.NoData);
       },
-      // Android only
       senderID: '760559770443',
-      // iOS only
       permissions: {
         alert: true,
         badge: true,
@@ -85,8 +64,8 @@ const Home: React.FC<ScreenType> = ({setUser, user}) => {
   useEffect(() => {
     const getProfile = async () => {
       try {
-        const authData = await getAuthData();
-        setProfileInfo(authData);
+        const profileData = await getAuthData();
+        setProfileInfo(profileData);
       } catch (err) {
         console.log('user profile err', err);
       }
@@ -99,7 +78,7 @@ const Home: React.FC<ScreenType> = ({setUser, user}) => {
   const getDashboardStats = async () => {
     try {
       const {data} = await get('dashboard');
-      setStats(data.data.stats);
+      setUserSubmitInfo(data.data.stats);
     } catch (err) {
       console.log('user stats err ', err);
     }
@@ -148,17 +127,17 @@ const Home: React.FC<ScreenType> = ({setUser, user}) => {
               handlePress={() => setOpen(true)}
               icon={<Bars3Icon size={25} color="black" />}
             />
-            <View className="h-screen flex flex-col items-center justify-center mt-10">
+            <View className="h-screen flex flex-col items-center justify-center">
               <TextComponent
                 content="Survey Application"
                 style="text-[25px] text-black font-thin"
               />
               <TextComponent
                 content={`Welcome Back, ${profileInfo?.name}`}
-                style="text-[20px] text-black font-thin my-6"
+                style="text-[20px] text-black font-thin my-5"
               />
 
-              <FlatListComponent data={stats} />
+              <FlatListComponent data={userSubmitInfo} />
 
               <Image
                 source={require('../assets/homepage.png')}

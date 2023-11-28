@@ -1,3 +1,5 @@
+/* eslint-disable handle-callback-err */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import {Image, KeyboardAvoidingView, StatusBar, View} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import {
@@ -14,9 +16,8 @@ import {storeAuthData, storeData} from '../utils/asyncStorage';
 import {ScreenType} from '../components/types/screenComponentsType';
 import {useToast} from 'react-native-toast-notifications';
 import Animated, {FadeInUp} from 'react-native-reanimated';
-import { login } from '../utils/ApiCaller';
-import { useNavigation } from '@react-navigation/native';
-
+import {login} from '../utils/ApiCaller';
+import {useNavigation} from '@react-navigation/native';
 
 const Login: React.FC<ScreenType> = ({setUser}) => {
   const navigation = useNavigation();
@@ -37,36 +38,25 @@ const Login: React.FC<ScreenType> = ({setUser}) => {
   };
 
   const request = async () => {
-
-    // const { navigate } = props.navigation;
-
-
     const payload = {
       email: email,
       password: password,
       login_mode: 'app login',
-    }
-
-    // navigation.navigate('home');
-
-    // console.log('props.navigation', navigation)
+    };
 
     await login('auth-login', payload)
-    .then((response)=> {
-
-       if (response?.data?.access_token) {
+      .then(response => {
+        if (response?.data?.access_token) {
           storeData(response?.data);
-          storeAuthData(response?.data?.user)
+          storeAuthData(response?.data?.user);
           setUser(response?.data);
         }
-
       })
-      .catch((err) => {
+      .catch(err => {
         toast.show('You are not authorize to Login App', {
-        type: 'danger',
+          type: 'danger',
+        });
       });
-      });
-
   };
 
   const handleLogin = () => {

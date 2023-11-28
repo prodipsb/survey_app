@@ -1,44 +1,34 @@
-import {Text, FlatList, TouchableOpacity} from 'react-native';
+import {TouchableOpacity, View} from 'react-native';
 import React from 'react';
-import {FlatListPropsType, PropsType} from '../types/uiTypes';
+import TextComponent from './TextComponent';
 
-const FlatListComponent: React.FC<FlatListPropsType> = ({data}) => {
+interface ItemData {
+  name: string;
+  count: number;
+}
 
+interface FlatListComponentProps {
+  data: ItemData[] | null | undefined;
+}
 
-  type ItemData = {
-    name: string;
-    count: number;
-  };
-  
-
-  type ItemProps = {
-    item: ItemData;
-  };
-
-  const Item = ({item}: ItemProps) => (
-    <TouchableOpacity style={{ backgroundColor:'white', margin:10, padding: 20 }}>
-      <Text>{item?.name}</Text>
-      <Text>{item?.count}</Text>
-    </TouchableOpacity>
-  );
-
-
-  const renderItem = ({item}: {item: ItemData}) => {
-
-    return (
-      <Item
-        item={item}
-      />
-    );
-  };
-
+const FlatListComponent: React.FC<FlatListComponentProps> = ({data}) => {
   return (
-    <FlatList
-        data={data}
-        renderItem={renderItem}
-        numColumns={2}
-        keyExtractor={item => item.name}
-      />
+    <View className="flex flex-row gap-3">
+      {data?.map((itemData, index) => (
+        <TouchableOpacity
+          key={index}
+          className="bg-white py-3 w-[160px] rounded-md">
+          <TextComponent
+            content={itemData?.name}
+            style="text-[16px] text-center"
+          />
+          <TextComponent
+            content={itemData?.count}
+            style="text-[18px] text-center pt-1"
+          />
+        </TouchableOpacity>
+      ))}
+    </View>
   );
 };
 

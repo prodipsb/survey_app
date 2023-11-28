@@ -1,109 +1,95 @@
 import axios from 'axios';
 import Config from 'react-native-config';
-import { getData } from './asyncStorage';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import {getData} from './asyncStorage';
 
-
-appUrl = Config?.APP_ENDPOINT;
-
-
+const appUrl = Config?.APP_ENDPOINT;
 
 export const get = async (endpoint, params) => {
-    const url = `${appUrl}/${endpoint}`;
+  const url = `${appUrl}/${endpoint}`;
 
-    
-    const authData = await getData();
+  const authData = await getData();
 
-    const headers = {}
+  const headers = {};
 
-    const options = {
-        method: 'GET',
-        url: `${url}`,
-        headers: {
-            'content-type': 'application/json',
-            'Authorization': `Bearer ${authData?.access_token}`,
-            ...headers
-        },
-        params
-    };
+  const options = {
+    method: 'GET',
+    url: `${url}`,
+    headers: {
+      'content-type': 'application/json',
+      Authorization: `Bearer ${authData?.access_token}`,
+      ...headers,
+    },
+    params,
+  };
 
-    return await axios(options)?.then((res) => res);
-}
+  return await axios(options)?.then(res => res);
+};
 
+export const post = async (endpoint, body) => {
+  const url = `${appUrl}/${endpoint}`;
+  const authData = await getData();
 
-export const post = async(endpoint, body) => {
-    const url = `${appUrl}/${endpoint}`;
-    const authData = await getData();
+  const headers = {};
 
-    console.log('url', url)
-    console.log('authData value', value)
-    console.log('authData', authData)
+  const options = {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${authData?.access_token}`,
+      ...headers,
+    },
+    url: url,
+    data: body,
+  };
 
-    const headers = {}
+  return await axios(options)
+    ?.then(res => res)
+    .catch(error => {
+      console.log('api response err', error);
+    });
+};
 
-    const options = {
-        method: 'POST',
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${authData?.access_token}`,
-            ...headers
-        },
-        url: url,
-        data: body
-    }
+export const login = async (endpoint, body) => {
+  const url = `${appUrl}/${endpoint}`;
 
-    return  await axios(options)?.then((res) => res)
-        .catch(error => {
-            console.log('api response err', error)
-     })
+  const headers = {};
 
-}
+  const options = {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      ...headers,
+    },
+    url: url,
+    data: body,
+  };
 
+  return await axios(options)?.then(res => res);
+};
 
-export const login = async(endpoint, body) => {
-    const url = `${appUrl}/${endpoint}`;
+export const postForm = async (endpoint, body) => {
+  const url = `${appUrl}/api/v1/${endpoint}`;
+  const authData = await getData();
 
-    const headers = {}
+  const headers = {};
 
-    const options = {
-        method: 'POST',
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-            ...headers
-        },
-        url: url,
-        data: body
-    }
+  const options = {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'multipart/form-data',
+      Authorization: `Bearer ${authData?.access_token}`,
+      ...headers,
+    },
+    url: url,
+    data: body,
+  };
 
-    return  await axios(options)?.then((res) => res)
-
-}
-
-
-
-export const postForm = async(endpoint, body) => {
-    const url = `${appUrl}/api/v1/${endpoint}`;
-    const authData = await getData();
-
-    const headers = {}
-
-    const options = {
-        method: 'POST',
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'multipart/form-data',
-            'Authorization': `Bearer ${authData?.access_token}`,
-            ...headers
-        },
-        url: url,
-        data: body
-    }
-
-    return  await axios(options)?.then((res) => res)
-        .catch(error => {
-            console.log('api postForm err22', error)
-     })
-
-}
+  return await axios(options)
+    ?.then(res => res)
+    .catch(error => {
+      console.log('api postForm err22', error);
+    });
+};
