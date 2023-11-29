@@ -1,5 +1,5 @@
 import {ApplicationData} from '../../states/state.interface';
-import {UserType} from '../../utils/asyncStorage';
+import {UserType} from '../../utils/userresponse';
 
 export type FormType = {
   state: ApplicationData;

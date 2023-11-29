@@ -76,8 +76,8 @@ const Login: React.FC<ScreenType> = ({setUser}) => {
         }
       })
       .catch(err => {
-        toast.show('You are not authorize to Login App', {
-          type: 'danger',
+        toast.show('You are not authorize to login', {
+          type: 'custom_error',
         });
       });
   };

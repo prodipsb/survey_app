@@ -12,7 +12,7 @@ export async function requestUserPermission() {
 }
 
 export const notificationListener = () => {
-  //   // Assume a message-notification contains a "type" property in the data payload of the screen to open
+  // Assume a message-notification contains a "type" property in the data payload of the screen to open
 
   messaging().onNotificationOpenedApp(remoteMessage => {
     console.log(
