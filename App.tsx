@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+/* eslint-disable react/no-unstable-nested-components */
+import React, {useState, useEffect} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Login from './screens/Login';
@@ -6,15 +7,15 @@ import Form from './screens/Form';
 import Home from './screens/Home';
 import {RootParamList} from './utils/navigationtype';
 import Profile from './screens/Profile';
-import {UserType, getData} from './utils/asyncStorage';
+import {getData} from './utils/asyncStorage';
 import {Alert, StatusBar, View, Modal} from 'react-native';
 import Spinner from 'react-native-spinkit';
 import {ToastProvider} from 'react-native-toast-notifications';
 import TextComponent from './components/ui/TextComponent';
 import messaging from '@react-native-firebase/messaging';
+import {UserType} from './utils/userresponse';
 
 const Stack = createNativeStackNavigator<RootParamList>();
-
 
 export default function App() {
   const [user, setUser] = React.useState<UserType | null>(null);
@@ -23,20 +24,15 @@ export default function App() {
 
   useEffect(() => {
     const unsubscribe = messaging().onMessage(async remoteMessage => {
+      const {notification} = remoteMessage;
+      const title = notification?.title;
+      const message = notification?.body;
 
-      const { data } = remoteMessage;
-      const title = data.title;
-      const message = data.message;
-    
-      Alert.alert('A New Message Arrived', `${title}\n\n${message}`);      
-
-
+      Alert.alert('A New Message Arrived', `${title}\n\n${message}`);
     });
 
     return unsubscribe;
   }, []);
-
-
 
   React.useEffect(() => {
     const fetchData = async () => {
@@ -52,25 +48,19 @@ export default function App() {
     fetchData();
   }, []);
 
-
-  const CustomAlert = (props) => {
+  const CustomAlert = props => {
     return (
       <Modal
-          animationType="fade"
-          transparent={true}
-          visible={props.modalVisible}
-          onRequestClose={() => {
-            props.setModalVisible(false);
-          }}
-        >
-          <View>
-  
-          </View>
-        </Modal>
-    )
-  }
-
-
+        animationType="fade"
+        transparent={true}
+        visible={props.modalVisible}
+        onRequestClose={() => {
+          props.setModalVisible(false);
+        }}>
+        <View />
+      </Modal>
+    );
+  };
 
   if (loading) {
     return (
@@ -111,7 +101,10 @@ export default function App() {
           </View>
         ),
       }}>
-        <CustomAlert modalVisible={modalVisible} setModalVisible={setModalVisible} />
+      <CustomAlert
+        modalVisible={modalVisible}
+        setModalVisible={setModalVisible}
+      />
       <NavigationContainer>
         <StatusBar
           translucent

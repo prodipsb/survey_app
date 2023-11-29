@@ -17,7 +17,8 @@ import {
 import {getData, removeData} from '../utils/asyncStorage';
 import FlatListComponent from '../components/ui/FlatListComponent';
 import {get} from '../utils/ApiCaller';
-import { useToast } from 'react-native-toast-notifications';
+import {useToast} from 'react-native-toast-notifications';
+import { requestNotificationPermission } from '../utils/notification permission';
 
 const Home: React.FC<ScreenType> = ({setUser, user}) => {
   const [open, setOpen] = useState<boolean>(false);
@@ -29,6 +30,7 @@ const Home: React.FC<ScreenType> = ({setUser, user}) => {
   useEffect(() => {
     requestUserPermission();
     notificationListener();
+    requestNotificationPermission();
   }, []);
 
   useEffect(() => {
