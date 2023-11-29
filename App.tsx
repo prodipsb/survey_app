@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/no-unstable-nested-components */
 import React, {useState, useEffect} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
@@ -23,16 +24,18 @@ export default function App() {
   const [modalVisible, setModalVisible] = useState(false);
 
   useEffect(() => {
-    const unsubscribe = messaging().onMessage(async remoteMessage => {
-      const {notification} = remoteMessage;
-      const title = notification?.title;
-      const message = notification?.body;
+    if (user !== null) {
+      const unsubscribe = messaging().onMessage(async remoteMessage => {
+        const {notification} = remoteMessage;
+        const title = notification?.title;
+        const message = notification?.body;
 
-      Alert.alert('A New Message Arrived', `${title}\n\n${message}`);
-    });
+        Alert.alert('A New Message Arrived', `${title}\n\n${message}`);
+      });
 
-    return unsubscribe;
-  }, []);
+      return unsubscribe;
+    }
+  }, [user]);
 
   React.useEffect(() => {
     const fetchData = async () => {
@@ -50,15 +53,17 @@ export default function App() {
 
   const CustomAlert = props => {
     return (
-      <Modal
-        animationType="fade"
-        transparent={true}
-        visible={props.modalVisible}
-        onRequestClose={() => {
-          props.setModalVisible(false);
-        }}>
-        <View />
-      </Modal>
+      user !== null && (
+        <Modal
+          animationType="fade"
+          transparent={true}
+          visible={props.modalVisible}
+          onRequestClose={() => {
+            props.setModalVisible(false);
+          }}>
+          <View />
+        </Modal>
+      )
     );
   };
 
