@@ -34,7 +34,14 @@ export const post = async (endpoint, body) => {
     data: body,
   };
 
-  return await axios(options)?.then(res => res);
+  try {
+    return await axios(options)?.then(res => res);
+  } catch (error) {
+    console.error("Error:", error);
+   // throw error; 
+  }
+
+  
 };
 
 export const login = async (endpoint, body) => {

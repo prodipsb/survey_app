@@ -48,6 +48,7 @@ export interface ApplicationData {
   surveillance: string;
   mobileOperator: string;
   operatorCoverage: string;
+  weeklyHoliday: string;
   shopPic: HTMLImageElement | null;
   binCertificate: HTMLImageElement | null;
   itemList: HTMLImageElement[];

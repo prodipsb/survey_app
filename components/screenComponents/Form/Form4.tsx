@@ -1,5 +1,5 @@
-import {View} from 'react-native';
-import React from 'react';
+import {View, TouchableWithoutFeedback} from 'react-native';
+import React, { useState } from 'react';
 import {FormType} from '../../types/screenComponentsType';
 import TextComponent from '../../ui/TextComponent';
 import DropdownComponents from '../../ui/DropdownComponents';
@@ -9,10 +9,19 @@ import {
   mobileOperatordata,
   softwarePrinterData,
   stockKeepingData,
+  weeklyHolidaydata,
 } from '../../../sampleData/sampleDropdown';
 
 const Form4: React.FC<FormType> = ({preview, dispatch, state, errorData}) => {
+
+  const [allClose, setAllClose] = useState<boolean>(false);
+
+  const handlePressOutside = () => {
+    setAllClose(!allClose)
+  };
+
   return (
+    <TouchableWithoutFeedback onPress={handlePressOutside}>
     <View className="w-[85%] mx-auto">
       <View className="w-full mt-5 mb-3">
         <TextComponent style="text-[18px] text-black" content="Stock keeping" />
@@ -24,6 +33,7 @@ const Form4: React.FC<FormType> = ({preview, dispatch, state, errorData}) => {
           search={false}
           preview={preview}
           errorData={errorData}
+          globalClose={allClose}
         />
       </View>
       <View className="w-full mt-5 mb-3">
@@ -36,6 +46,7 @@ const Form4: React.FC<FormType> = ({preview, dispatch, state, errorData}) => {
           search={false}
           preview={preview}
           errorData={errorData}
+          globalClose={allClose}
         />
       </View>
       <View className="w-full mt-5 mb-3">
@@ -48,6 +59,7 @@ const Form4: React.FC<FormType> = ({preview, dispatch, state, errorData}) => {
           search={false}
           preview={preview}
           errorData={errorData}
+          globalClose={allClose}
         />
       </View>
       <View className="w-full mt-5 mb-3">
@@ -60,6 +72,7 @@ const Form4: React.FC<FormType> = ({preview, dispatch, state, errorData}) => {
           search={false}
           preview={preview}
           errorData={errorData}
+          globalClose={allClose}
         />
       </View>
       <View className="w-full mt-5 mb-3">
@@ -72,6 +85,7 @@ const Form4: React.FC<FormType> = ({preview, dispatch, state, errorData}) => {
           search={false}
           preview={preview}
           errorData={errorData}
+          globalClose={allClose}
         />
       </View>
       <View className="w-full mt-5 mb-3">
@@ -84,6 +98,7 @@ const Form4: React.FC<FormType> = ({preview, dispatch, state, errorData}) => {
           search={false}
           preview={preview}
           errorData={errorData}
+          globalClose={allClose}
         />
       </View>
       <View className="w-full mt-5 mb-3">
@@ -96,6 +111,7 @@ const Form4: React.FC<FormType> = ({preview, dispatch, state, errorData}) => {
           search={false}
           preview={preview}
           errorData={errorData}
+          globalClose={allClose}
         />
       </View>
       <View className="w-full mt-5 mb-3">
@@ -111,6 +127,7 @@ const Form4: React.FC<FormType> = ({preview, dispatch, state, errorData}) => {
           search={false}
           preview={preview}
           errorData={errorData}
+          globalClose={allClose}
         />
       </View>
       {state.mobileOperator && (
@@ -127,10 +144,29 @@ const Form4: React.FC<FormType> = ({preview, dispatch, state, errorData}) => {
             search={false}
             preview={preview}
             errorData={errorData}
+            globalClose={allClose}
           />
         </View>
       )}
+
+      <View className="w-full mt-5 mb-3">
+        <TextComponent
+          style="text-[18px] text-black"
+          content="Weekly Holiday"
+        />
+        <DropdownComponents
+          defaultValue={state.weeklyHoliday}
+          name="weeklyHoliday"
+          handleSelect={dispatch}
+          data={weeklyHolidaydata}
+          search={false}
+          preview={preview}
+          errorData={errorData}
+          globalClose={allClose}
+        />
+      </View>
     </View>
+    </TouchableWithoutFeedback>
   );
 };
 

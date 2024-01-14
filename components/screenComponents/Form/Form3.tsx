@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import {View} from 'react-native';
-import React, {useEffect} from 'react';
+import {View, TouchableWithoutFeedback} from 'react-native';
+import React, {useEffect, useState} from 'react';
 import TextComponent from '../../ui/TextComponent';
 import InputComponent from '../../ui/InputComponent';
 import {FormType} from '../../types/screenComponentsType';
@@ -16,6 +16,12 @@ import {
 } from '../../../utils/calculateVat';
 
 const Form3: React.FC<FormType> = ({preview, dispatch, state, errorData}) => {
+  const [allClose, setAllClose] = useState<boolean>(false);
+
+  const handlePressOutside = () => {
+    setAllClose(!allClose)
+  };
+
   useEffect(() => {
     if (state.unitPrice && state.vatParcent) {
       if (state.sdPercent) {
@@ -36,6 +42,7 @@ const Form3: React.FC<FormType> = ({preview, dispatch, state, errorData}) => {
   }, [state.unitPrice, state.vatParcent, state.sdPercent]);
 
   return (
+    <TouchableWithoutFeedback onPress={handlePressOutside}>
     <View className="w-[85%] mx-auto">
       <View className="w-full mb-3 mt-5">
         <TextComponent
@@ -82,6 +89,7 @@ const Form3: React.FC<FormType> = ({preview, dispatch, state, errorData}) => {
           search={false}
           preview={preview}
           errorData={errorData}
+          globalClose={allClose}
         />
       </View>
       {state.onlineSaleAvailable === 'Yes' && (
@@ -133,6 +141,7 @@ const Form3: React.FC<FormType> = ({preview, dispatch, state, errorData}) => {
           search={false}
           preview={preview}
           errorData={errorData}
+          globalClose={allClose}
         />
       </View>
       {state.productInfo === 'Type' && (
@@ -166,6 +175,7 @@ const Form3: React.FC<FormType> = ({preview, dispatch, state, errorData}) => {
               search={false}
               preview={preview}
               errorData={errorData}
+              globalClose={allClose}
             />
           </View>
           <View className="w-full mb-3 mt-5">
@@ -245,6 +255,7 @@ const Form3: React.FC<FormType> = ({preview, dispatch, state, errorData}) => {
         </>
       )}
     </View>
+    </TouchableWithoutFeedback>
   );
 };
 

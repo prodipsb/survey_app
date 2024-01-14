@@ -17,7 +17,7 @@ const FlatListComponent: React.FC<FlatListComponentProps> = ({data}) => {
       {data?.map((itemData, index) => (
         <TouchableOpacity
           key={index}
-          className="bg-white py-3 w-[160px] rounded-md">
+          className="bg-white py-3 w-[100px] rounded-md">
           <TextComponent
             content={itemData?.name}
             style="text-[14px] text-center text-black"

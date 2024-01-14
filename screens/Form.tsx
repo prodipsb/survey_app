@@ -22,6 +22,7 @@ import {useToast} from 'react-native-toast-notifications';
 import {useNavigation} from '@react-navigation/native';
 import {NavigationType} from '../utils/navigationtype';
 import {SafeAreaView} from 'react-native-safe-area-context';
+import {GestureHandlerRootView} from 'react-native-gesture-handler';
 
 import Config from 'react-native-config';
 import {removeData} from '../utils/asyncStorage';
@@ -39,6 +40,8 @@ const Form: React.FC<ScreenType> = ({setUser, user}) => {
   const navigation = useNavigation<NavigationType>();
 
   const handleSubmit = () => {
+    // console.log('alll state', state)
+    // return true;
     const check = validation(state);
     if (check !== 'ok') {
       Alert.alert(
@@ -89,7 +92,6 @@ const Form: React.FC<ScreenType> = ({setUser, user}) => {
         },
       });
       if (data) {
-        console.log(data);
         setLoading(false);
         toast.show('Survey Form Data submitted!', {
           type: 'custom_success',
@@ -175,6 +177,7 @@ const Form: React.FC<ScreenType> = ({setUser, user}) => {
               />
             </View>
           )}
+          <GestureHandlerRootView style={{flex: 1}}>
           <ScrollView ref={scrollRef}>
             <Form1
               state={state}
@@ -217,6 +220,7 @@ const Form: React.FC<ScreenType> = ({setUser, user}) => {
               />
             </View>
           </ScrollView>
+          </GestureHandlerRootView>
         </MenuDrawer>
       </View>
     </SafeAreaView>

@@ -34,24 +34,31 @@ const Home: React.FC<ScreenType> = ({setUser, user}) => {
   }, []);
 
   useEffect(() => {
-    const getProfile = async () => {
-      try {
-        const profileData = await getData();
-        setProfileInfo(profileData?.user);
-      } catch (err: any) {
-        if (err?.response?.status === 401) {
-          removeData();
-          setUser(null);
-        }
-      }
-    };
+    
     getProfile();
     getDashboardStats();
+
   }, []);
 
-  const getDashboardStats = async () => {
+  const getProfile = async () => {
     try {
-      const {data} = await get('dashboard');
+      const profileData = await getData();
+      setProfileInfo(profileData?.user);
+    } catch (err: any) {
+      if (err?.response?.status === 401) {
+        removeData();
+        setUser(null);
+      }
+    }
+  };
+
+  const getDashboardStats = async () => {
+    const profileData = await getData();
+    try {
+      const payload={
+        user_id: profileData?.user?.id
+      }
+      const {data} = await get('dashboard',payload);
       setUserSubmitInfo(data?.stats);
     } catch (err: any) {
       if (err?.response?.status === 401) {

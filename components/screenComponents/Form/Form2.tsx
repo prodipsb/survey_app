@@ -1,5 +1,5 @@
-import {View} from 'react-native';
-import React from 'react';
+import {TouchableOpacity, View, TouchableWithoutFeedback} from 'react-native';
+import React, { useState } from 'react';
 import {FormType} from '../../types/screenComponentsType';
 import TextComponent from '../../ui/TextComponent';
 import InputComponent from '../../ui/InputComponent';
@@ -14,9 +14,17 @@ import {
   businessCategories,
   businessSubCategories,
 } from '../../../sampleData/businessCategories';
+import { Text } from 'react-native-svg';
 
 const Form2: React.FC<FormType> = ({state, dispatch, preview, errorData}) => {
+  const [allClose, setAllClose] = useState<boolean>(false);
+
+  const handlePressOutside = () => {
+    setAllClose(!allClose)
+  };
+
   return (
+    <TouchableWithoutFeedback onPress={handlePressOutside}>
     <View className="w-[85%] mx-auto">
       <View className="w-full h-[70px] mt-5">
         <TextComponent
@@ -43,6 +51,7 @@ const Form2: React.FC<FormType> = ({state, dispatch, preview, errorData}) => {
           search={true}
           preview={preview}
           errorData={errorData}
+          globalClose={allClose}
         />
       </View>
       {state?.category && (
@@ -59,6 +68,7 @@ const Form2: React.FC<FormType> = ({state, dispatch, preview, errorData}) => {
             search={true}
             preview={preview}
             errorData={errorData}
+            globalClose={allClose}
           />
         </View>
       )}
@@ -132,6 +142,7 @@ const Form2: React.FC<FormType> = ({state, dispatch, preview, errorData}) => {
           search={false}
           preview={preview}
           errorData={errorData}
+          globalClose={allClose}
         />
       </View>
       <View className="w-full mt-5 mb-3">
@@ -144,6 +155,7 @@ const Form2: React.FC<FormType> = ({state, dispatch, preview, errorData}) => {
           search={false}
           preview={preview}
           errorData={errorData}
+          globalClose={allClose}
         />
       </View>
       <View className="w-full mt-5 mb-3">
@@ -159,6 +171,7 @@ const Form2: React.FC<FormType> = ({state, dispatch, preview, errorData}) => {
           search={false}
           preview={preview}
           errorData={errorData}
+          globalClose={allClose}
         />
       </View>
       {state.posSoftwareProvider === 'Personal' && (
@@ -175,6 +188,7 @@ const Form2: React.FC<FormType> = ({state, dispatch, preview, errorData}) => {
             search={false}
             preview={preview}
             errorData={errorData}
+            globalClose={allClose}
           />
         </View>
       )}
@@ -209,11 +223,13 @@ const Form2: React.FC<FormType> = ({state, dispatch, preview, errorData}) => {
               search={false}
               preview={preview}
               errorData={errorData}
+              globalClose={allClose}
             />
           </View>
         </>
       )}
     </View>
+    </TouchableWithoutFeedback>
   );
 };
 

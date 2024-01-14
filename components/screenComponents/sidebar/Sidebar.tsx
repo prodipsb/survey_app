@@ -88,6 +88,15 @@ const Sidebar: React.FC<SidebarType> = ({setOpen, user, setUser}) => {
             style="text-[18px] font-thin text-white ml-3"
           />
         </Pressable>
+        {/* <Pressable
+          onPress={() => navigation.replace('googleMap')}
+          className="flex flex-row items-center mb-8">
+          <UserCircleIcon size={25} color="white" />
+          <TextComponent
+            content="Google Tracking"
+            style="text-[18px] font-thin text-white ml-3"
+          />
+        </Pressable> */}
         <Pressable
           className="flex flex-row items-center mb-8"
           onPress={() => handleLogout()}>

@@ -63,3 +63,14 @@ export const OperatorCoveragedata = [
   {label: 'Average', value: 'Average'},
   {label: 'Poor', value: 'Poor'},
 ];
+
+export const weeklyHolidaydata = [
+  {label: 'No Holiday', value: 'No Holiday'},
+  {label: 'Friday', value: 'Friday'},
+  {label: 'Saturday', value: 'Saturday'},
+  {label: 'Sunday', value: 'Sunday'},
+  {label: 'Monday', value: 'Monday'},
+  {label: 'Tuesday', value: 'Tuesday'},
+  {label: 'Wednesday', value: 'Wednesday'},
+  {label: 'Thursday', value: 'Thursday'},
+];

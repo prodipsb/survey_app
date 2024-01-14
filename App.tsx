@@ -15,6 +15,7 @@ import {ToastProvider} from 'react-native-toast-notifications';
 import TextComponent from './components/ui/TextComponent';
 import messaging from '@react-native-firebase/messaging';
 import {UserType} from './utils/userresponse';
+import GoogleMap from './screens/GoogleMap';
 
 const Stack = createNativeStackNavigator<RootParamList>();
 
@@ -127,6 +128,9 @@ export default function App() {
               </Stack.Screen>
               <Stack.Screen name="profile" options={{headerShown: false}}>
                 {props => <Profile {...props} user={user} setUser={setUser} />}
+              </Stack.Screen>
+              <Stack.Screen name="googleMap" options={{headerShown: false}}>
+                {props => <GoogleMap {...props} user={user} setUser={setUser}/>}
               </Stack.Screen>
             </>
           ) : (

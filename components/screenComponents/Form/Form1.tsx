@@ -1,5 +1,5 @@
-import {View} from 'react-native';
-import React from 'react';
+import {Button, TouchableOpacity, View, Text, TouchableWithoutFeedback} from 'react-native';
+import React, { useState } from 'react';
 import TextComponent from '../../ui/TextComponent';
 import DateInput from '../../ui/DateInput';
 import InputComponent from '../../ui/InputComponent';
@@ -9,7 +9,18 @@ import {commisionerate} from '../../../sampleData/commissionerate';
 import {circle, subdivision} from '../../../sampleData/divisionCircle';
 
 const Form1: React.FC<FormType> = ({preview, dispatch, state, errorData}) => {
+
+  const [allClose, setAllClose] = useState<boolean>(false);
+
+
+  const handlePressOutside = () => {
+    setAllClose(!allClose)
+  };
+
+
+
   return (
+    <TouchableWithoutFeedback onPress={handlePressOutside}>
     <View className="w-[85%] mx-auto">
       <View className="w-full h-[70px] mt-5">
         <TextComponent
@@ -53,6 +64,7 @@ const Form1: React.FC<FormType> = ({preview, dispatch, state, errorData}) => {
           search={false}
           preview={preview}
           errorData={errorData}
+          globalClose={allClose}
         />
       </View>
       {state.commissioneRate && (
@@ -69,6 +81,7 @@ const Form1: React.FC<FormType> = ({preview, dispatch, state, errorData}) => {
             search={true}
             preview={preview}
             errorData={errorData}
+            globalClose={allClose}
           />
         </View>
       )}
@@ -86,6 +99,7 @@ const Form1: React.FC<FormType> = ({preview, dispatch, state, errorData}) => {
             preview={preview}
             search={false}
             errorData={errorData}
+            globalClose={allClose}
           />
         </View>
       )}
@@ -197,7 +211,7 @@ const Form1: React.FC<FormType> = ({preview, dispatch, state, errorData}) => {
         />
         <InputComponent
           style="text-[18px] text-black border-b"
-          placeholder="Example: Mr. xxx"
+          placeholder="Example: Mr xxx"
           handleChange={dispatch}
           name="binHolderName"
           defaultValue={state.binHolderName}
@@ -249,6 +263,7 @@ const Form1: React.FC<FormType> = ({preview, dispatch, state, errorData}) => {
         />
       </View>
     </View>
+    </TouchableWithoutFeedback>
   );
 };
 

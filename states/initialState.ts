@@ -50,6 +50,7 @@ export const initialState: ApplicationData = {
   surveillance: '',
   mobileOperator: '',
   operatorCoverage: '',
+  weeklyHoliday: '',
   shopPic: null,
   binCertificate: null,
   itemList: [],

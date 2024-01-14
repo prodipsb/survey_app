@@ -17,7 +17,7 @@ import {storeData} from '../utils/asyncStorage';
 import {ScreenType} from '../components/types/screenComponentsType';
 import {useToast} from 'react-native-toast-notifications';
 import Animated, {FadeInUp} from 'react-native-reanimated';
-import {login} from '../utils/ApiCaller';
+import {login, post} from '../utils/ApiCaller';
 import PushNotification from 'react-native-push-notification';
 import Config from 'react-native-config';
 import {DeviceTokenType, UserType} from '../utils/userresponse';
@@ -72,6 +72,13 @@ const Login: React.FC<ScreenType> = ({setUser}) => {
     await login('auth-login', payload)
       .then(response => {
         if (response?.data?.access_token) {
+          // console.log('response?.data', response?.data)
+
+          if (response?.data) {
+              storeData(response?.data);
+              setUser(response?.data);
+          }
+
           userDeviceTokenStore(response?.data);
         }
       })
@@ -133,28 +140,33 @@ const Login: React.FC<ScreenType> = ({setUser}) => {
   }, [email, password]);
 
   const userDeviceTokenStore = async (profileInfo: UserType) => {
-    try {
-      const {data} = await axios.post(
-        API + '/store/device-tokens',
-        {
-          user_id: profileInfo?.user?.id,
-          user: profileInfo?.user?.name,
-          device_token: deviceToken?.token,
-        },
-        {
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${profileInfo?.access_token}`,
-          },
-        },
-      );
+    const payload = {
+      user_id: profileInfo?.user?.id,
+      user: profileInfo?.user?.name,
+      device_token: deviceToken?.token,
+    }
 
-      if (data) {
-        if (data?.code === 200) {
-          storeData(profileInfo);
-          setUser(profileInfo);
-        }
-      }
+    // console.log('befreo store token', payload)
+    try {
+
+      const data = await post('store/device-tokens',payload);
+      console.log('check user token store', data?.data)
+      // const {data} = await axios.post(
+      //   API + '/store/device-tokens',payload,
+      //   {
+      //     headers: {
+      //       'Content-Type': 'application/json',
+      //       Authorization: `Bearer ${profileInfo?.access_token}`,
+      //     },
+      //   },
+      // );
+
+      // if (data) {
+      //   if (data?.code === 200) {
+      //     storeData(profileInfo);
+      //     setUser(profileInfo);
+      //   }
+      // }
     } catch (err) {
       toast.show('Unauthorized user...', {
         type: 'custom_error',

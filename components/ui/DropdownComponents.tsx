@@ -1,8 +1,13 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, {useState, useEffect} from 'react';
-import DropDownPicker from 'react-native-dropdown-picker';
+import React, {useState, useEffect, useRef, useReducer} from 'react';
+import DropDownPicker, { ValueType } from 'react-native-dropdown-picker';
 import TextComponent from './TextComponent';
-import {View} from 'react-native';
+import {TouchableWithoutFeedback, View, Platform, UIManager, findNodeHandle} from 'react-native';
+import { reducer } from '../../states/formReducer';
+import { initialState } from '../../states/initialState';
+import { actionTypes } from '../../states/actionTypes';
+
+// DropDownPicker.setListMode("MODAL")
 
 type IDProps = {
   defaultValue: string;
@@ -15,6 +20,7 @@ type IDProps = {
   search: boolean;
   preview: boolean;
   errorData: string;
+  globalClose: boolean;
 };
 
 const DropdownComponents: React.FC<IDProps> = ({
@@ -25,14 +31,19 @@ const DropdownComponents: React.FC<IDProps> = ({
   search,
   preview,
   errorData,
+  globalClose
 }) => {
   const [open, setOpen] = useState<boolean>(false);
   const [value, setValue] = useState<string>('');
   const [items, setItems] = useState<{label: string; value: string}[] | []>([]);
+  const [isOpen, setIsOpen] = useState(false);
+  const dropdownRef = useRef<View>(null);
+  const [state, dispatch] = useReducer(reducer, initialState);
 
   useEffect(() => {
+    setOpen(false)
     setItems(data);
-  }, [data]);
+  }, [data, globalClose]);
 
   useEffect(() => {
     handleSelect({
@@ -40,6 +51,10 @@ const DropdownComponents: React.FC<IDProps> = ({
       payload: {name: name, value: value},
     });
   }, [value]);
+
+  const handleOpen = ()=> {
+    setOpen(!open)
+  }
 
   return (
     <>
@@ -56,23 +71,40 @@ const DropdownComponents: React.FC<IDProps> = ({
               style="text-red-500 text-[14px] mt-2"
             />
           )}
-          <DropDownPicker
+          <DropDownPicker   
+            dropDownDirection="TOP"     
+            zIndex={3000}
+            zIndexInverse={1000}
             style={{
               backgroundColor: 'rgb(226 232 240)',
               borderRadius: 0,
               borderWidth: 0,
               borderBottomWidth: 1.2,
-              zIndex: 0,
+              zIndex:0,
             }}
             textStyle={{
               fontFamily: 'InriaSerif-Regular',
               fontSize: 18,
-              color: open ? 'black' : 'gray',
+              color: open ? 'black' : 'black',
+            }}
+            placeholderStyle={{
+              color: '#696969',
+              fontSize: 16,
+            }}
+            dropDownContainerStyle={{
+               borderColor: '#ccc',
+               borderRadius: 10,
+              // zIndex: 1000,
+               elevation: 4,
+              // position: 'absolute',
+              alignSelf: 'center',
+              position: 'relative',
+              top: 0,
             }}
             open={open}
             value={defaultValue}
             items={items}
-            setOpen={setOpen}
+            setOpen={handleOpen}
             setValue={setValue}
             setItems={setItems}
             maxHeight={300}
@@ -86,6 +118,7 @@ const DropdownComponents: React.FC<IDProps> = ({
               marginTop: 8,
               marginBottom: 8,
             }}
+            
           />
         </View>
       )}
