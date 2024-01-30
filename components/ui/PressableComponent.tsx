@@ -11,7 +11,11 @@ const PressableComponent: React.FC<PropsType> = ({
   handlePress,
 }) => {
   return (
-    <Pressable className={style} onPress={() => handlePress && handlePress()}>
+    <Pressable 
+      accessible={true}
+      accessibilityLabel={'Show Password'}
+      accessibilityHint="Toggle password visibility"
+     className={style} onPress={() => handlePress && handlePress()}>
       {icon ? icon : <TextComponent content={content} style={innerStyle} />}
     </Pressable>
   );

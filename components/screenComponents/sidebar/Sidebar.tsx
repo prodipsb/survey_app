@@ -6,6 +6,7 @@ import {
   Square3Stack3DIcon,
   UserCircleIcon,
   XMarkIcon,
+  BellIcon
 } from 'react-native-heroicons/solid';
 import TextComponent from '../../ui/TextComponent';
 import {useNavigation} from '@react-navigation/native';
@@ -75,7 +76,25 @@ const Sidebar: React.FC<SidebarType> = ({setOpen, user, setUser}) => {
           className="flex flex-row items-center mb-8">
           <Square3Stack3DIcon size={25} color="white" />
           <TextComponent
-            content="Survey form"
+            content="New Survey"
+            style="text-[18px] font-thin text-white ml-3"
+          />
+        </Pressable>
+        <Pressable
+          onPress={() => navigation.replace('surveys')}
+          className="flex flex-row items-center mb-8">
+          <Square3Stack3DIcon size={25} color="white" />
+          <TextComponent
+            content="All Surveys"
+            style="text-[18px] font-thin text-white ml-3"
+          />
+        </Pressable>
+        <Pressable
+          onPress={() => navigation.replace('notifications')}
+          className="flex flex-row items-center mb-8">
+          <BellIcon size={25} color="white" />
+          <TextComponent
+            content="Notifications"
             style="text-[18px] font-thin text-white ml-3"
           />
         </Pressable>

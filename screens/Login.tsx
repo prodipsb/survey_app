@@ -69,27 +69,80 @@ const Login: React.FC<ScreenType> = ({setUser}) => {
       login_mode: 'app login',
     };
 
-    await login('auth-login', payload)
+
+
+    // Call the login function and handle the response
+      await login('auth-login', payload)
       .then(response => {
         if (response?.data?.access_token) {
-          // console.log('response?.data', response?.data)
-
           if (response?.data) {
-              storeData(response?.data);
-              setUser(response?.data);
+            storeData(response?.data);
+            setUser(response?.data);
           }
-
           userDeviceTokenStore(response?.data);
         }
       })
       .catch(err => {
-        toast.show('You are not authorize to login', {
+        // console.error('Error during login process:', err.message); // Log the error message
+        toast.show(err.message, { // Show a toast message with the error message
           type: 'custom_error',
         });
       });
+
+
+    
+
+    // // Call the login function and handle the response
+    //   await login('auth-login', payload)
+    //   .then(response => {
+    //     if (response?.data?.access_token) {
+    //       if (response?.data) {
+    //         storeData(response?.data);
+    //         setUser(response?.data);
+    //       }
+    //       userDeviceTokenStore(response?.data);
+    //     }
+    //   })
+    //   .catch(err => {
+    //     console.error('Error during login process:', err); // Log the error
+    //     toast.show('You are not authorized to login', {
+    //       type: 'custom_error',
+    //     });
+    //   });
+
+    // await login('auth-login', payload)
+    //   .then(response => {
+    //     // console.log('login response', response)
+    //     if (response?.data?.access_token) {
+    //       // console.log('response?.data', response?.data)
+
+    //       if (response?.data) {
+    //           storeData(response?.data);
+    //           setUser(response?.data);
+    //       }
+
+    //       userDeviceTokenStore(response?.data);
+    //     }
+    //   })
+    //   .catch(err => {
+    //     console.log('aaaaa', err);
+    //     toast.show('You are not authorize to login', {
+    //       type: 'custom_error',
+    //     });
+    //   });
+
+
+
   };
 
   const handleLogin = () => {
+    // console.log('password', password)
+    // console.log('aaa', digituptoSix.test(password))
+
+    // const password = '1234';
+// console.log('password', password);
+// console.log('aaa', /^\d{6}$/.test(password));
+
     if (email === '') {
       setValidationError(prevError => ({
         ...prevError,
@@ -113,6 +166,7 @@ const Login: React.FC<ScreenType> = ({setUser}) => {
         ...prevError,
         password: 'Password must 6 digit number',
       }));
+      toast.show("Password must 6 digit number")
     }
     if (
       validationError.email === '' &&
@@ -150,7 +204,7 @@ const Login: React.FC<ScreenType> = ({setUser}) => {
     try {
 
       const data = await post('store/device-tokens',payload);
-      console.log('check user token store', data?.data)
+      // console.log('check user token store', data?.data)
       // const {data} = await axios.post(
       //   API + '/store/device-tokens',payload,
       //   {
@@ -233,9 +287,9 @@ const Login: React.FC<ScreenType> = ({setUser}) => {
                 handlePress={togglePassword}
                 icon={
                   showPassword ? (
-                    <EyeIcon size={20} color={'black'} />
-                  ) : (
                     <EyeSlashIcon size={20} color={'black'} />
+                  ) : (
+                    <EyeIcon size={20} color={'black'} />
                   )
                 }
               />

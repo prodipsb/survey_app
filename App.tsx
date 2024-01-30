@@ -16,6 +16,10 @@ import TextComponent from './components/ui/TextComponent';
 import messaging from '@react-native-firebase/messaging';
 import {UserType} from './utils/userresponse';
 import GoogleMap from './screens/GoogleMap';
+import Surveys from './screens/Surveys';
+import SurveyDetails from './screens/SurveyDetails';
+import Notifications from './screens/Notifications';
+import NotificationDetails from './screens/NotificationDetails';
 
 const Stack = createNativeStackNavigator<RootParamList>();
 
@@ -73,7 +77,7 @@ export default function App() {
       <View className="w-screen h-screen flex-1 items-center justify-center">
         <StatusBar
           translucent
-          backgroundColor={'transparent'}
+          backgroundColor={'white'}
           barStyle={'dark-content'}
         />
         <Spinner isVisible={loading} size={50} type={'Wave'} color={'gray'} />
@@ -128,6 +132,18 @@ export default function App() {
               </Stack.Screen>
               <Stack.Screen name="profile" options={{headerShown: false}}>
                 {props => <Profile {...props} user={user} setUser={setUser} />}
+              </Stack.Screen>
+              <Stack.Screen name="surveys" options={{headerShown: false}}>
+                {props => <Surveys {...props} user={user} setUser={setUser} />}
+              </Stack.Screen>
+              <Stack.Screen name="surveyDetails" options={{headerShown: false}}>
+                {props => <SurveyDetails {...props} user={user} setUser={setUser} />}
+              </Stack.Screen>
+              <Stack.Screen name="notifications" options={{headerShown: false}}>
+                {props => <Notifications {...props} user={user} setUser={setUser} />}
+              </Stack.Screen>
+              <Stack.Screen name="notificationDetails" options={{headerShown: false}}>
+                {props => <NotificationDetails {...props} user={user} setUser={setUser} />}
               </Stack.Screen>
               <Stack.Screen name="googleMap" options={{headerShown: false}}>
                 {props => <GoogleMap {...props} user={user} setUser={setUser}/>}

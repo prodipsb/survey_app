@@ -1,4 +1,4 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.surveyMaster">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -20,7 +20,7 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
 
-          <meta-data
+        <meta-data
             android:name="com.dieam.reactnativepushnotification.notification_channel_name"
             android:value="Survey APP" />
         <meta-data
@@ -30,7 +30,7 @@
             android:name="com.dieam.reactnativepushnotification.notification_color"
             android:resource="@android:color/white" />
 
-            <service
+        <service
             android:name="com.dieam.reactnativepushnotification.modules.RNPushNotificationListenerService"
             android:exported="true">
             <intent-filter>

@@ -1,4 +1,4 @@
-package com.survey_application;
+package com.surveyMaster;
 
 import android.app.Application;
 import com.facebook.react.PackageList;
