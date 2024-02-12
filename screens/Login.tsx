@@ -149,12 +149,12 @@ const Login: React.FC<ScreenType> = ({setUser}) => {
         email: 'Required field*',
       }));
     }
-    if (email !== '' && !emailExactRegex.test(email)) {
-      setValidationError(prevError => ({
-        ...prevError,
-        email: 'Invalid email*',
-      }));
-    }
+    // if (email !== '' && !emailExactRegex.test(email)) {
+    //   setValidationError(prevError => ({
+    //     ...prevError,
+    //     email: 'Invalid email*',
+    //   }));
+    // }
     if (password === '') {
       setValidationError(prevError => ({
         ...prevError,
@@ -166,7 +166,7 @@ const Login: React.FC<ScreenType> = ({setUser}) => {
         ...prevError,
         password: 'Password must 6 digit number',
       }));
-      toast.show("Password must 6 digit number")
+      // toast.show("Password must 6 digit number")
     }
     if (
       validationError.email === '' &&
@@ -267,7 +267,7 @@ const Login: React.FC<ScreenType> = ({setUser}) => {
             />
             <InputComponent
               style="border-b placeholder:text-[18px] text-[#514A4A]"
-              placeholder="Email"
+              placeholder="Email or Employee ID"
               handleInputChange={setEmail}
             />
             <TextComponent

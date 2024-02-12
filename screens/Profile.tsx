@@ -19,10 +19,13 @@ import {useToast} from 'react-native-toast-notifications';
 import Config from 'react-native-config';
 import {get} from '../utils/ApiCaller';
 import {removeData} from '../utils/asyncStorage';
+import { useNavigation } from '@react-navigation/native';
+import { NavigationType } from '../utils/navigationtype';
 const API = Config.APP_ENDPOINT;
 const IMGAPI = Config.APP_IMAGE_URL;
 
 const Profile: React.FC<ScreenType> = ({setUser, user}) => {
+  const navigation = useNavigation<NavigationType>();
   const [open, setOpen] = useState<boolean>(false);
   const [profileInfo, setProfileInfo] = useState<UserResponse | null>();
   const [profileImage, setProfileImage] = useState<any>(null);
@@ -95,6 +98,11 @@ const Profile: React.FC<ScreenType> = ({setUser, user}) => {
     }
   }, [profileImage]);
 
+
+  const handlePasswordChange = () => {
+    navigation.replace('changePassword')
+  }
+
   return (
     <SafeAreaView className="h-screen w-screen flex-1 bg-slate-200">
       <Spinner
@@ -151,7 +159,28 @@ const Profile: React.FC<ScreenType> = ({setUser, user}) => {
                     />
                   )}
 
+                  <TouchableOpacityComponent
+                      style="mt-2 mb-2 bg-gray-500 px-5 py-2 rounded-md"
+                      innerStyle="text-[18px] text-white"
+                      content={'Change Password'}
+                      handlePress={handlePasswordChange}
+                    />
+
                   <View className="border w-[95%] mx-auto mt-[5%]">
+                  <View className="flex flex-row">
+                      <View className="p-2 border w-[30%]">
+                        <TextComponent
+                          style="text-[16px] text-black text-center"
+                          content={'Employee ID'}
+                        />
+                      </View>
+                      <View className="p-2 border w-[70%]">
+                        <TextComponent
+                          style="text-[16px] text-black text-center"
+                          content={profileInfo?.employee_id}
+                        />
+                      </View>
+                    </View>
                     <View className="flex flex-row">
                       <View className="p-2 border w-[30%]">
                         <TextComponent

@@ -45,6 +45,7 @@ const SurveyDetails = ({ route, user, setUser }) => {
     setLoading(false)
   }
 
+
   return (
     <SafeAreaView className="h-screen w-screen flex-1 bg-slate-200">
     <Spinner
@@ -81,7 +82,7 @@ const SurveyDetails = ({ route, user, setUser }) => {
         <ScrollView ref={scrollRef}>
         {survey ? (
               <>
-                <View className="h-screen flex flex-col justify-center">
+                <View>
                 <View  className="items-center mt-2 mb-3">
                   <Text className="text-[25px] text-black font-bold">Survey Details</Text></View>
                 <View style={styles.container}>
@@ -91,372 +92,372 @@ const SurveyDetails = ({ route, user, setUser }) => {
 
                     {survey?.surveySubmittedUserName && (
                       <View style={styles.dataContent}>
-                        <Text className='text-[15px] text-gray font-bold'>Surveyor : </Text>
-                        <Text className='text-gray'>{survey?.surveySubmittedUserName}</Text>
+                        <Text className='text-[15px] text-gray font-bold' style={styles.textColor}>Surveyor : </Text>
+                        <Text className='text-gray' style={styles.textColor}>{survey?.surveySubmittedUserName}</Text>
                     </View>
                     )}
                     
                     {survey?.surveySubmittedUserPhone && (
                     <View style={styles.dataContent}>
-                      <Text className='text-[15px] text-gray font-bold'>Surveyor Phone : </Text>
-                      <Text className='text-gray'>{survey?.surveySubmittedUserPhone}</Text>
+                      <Text className='text-[15px] text-gray font-bold' style={styles.textColor}>Surveyor Phone : </Text>
+                      <Text className='text-gray' style={styles.textColor}>{survey?.surveySubmittedUserPhone}</Text>
                     </View>
                      )}
 
                     {survey?.surveySubmittedUserEmail && (
                     <View style={styles.dataContent}>
-                      <Text className='text-[15px] text-gray font-bold'>Surveyor Email : </Text>
-                      <Text className='text-gray'>{survey?.surveySubmittedUserEmail}</Text>
+                      <Text className='text-[15px] text-gray font-bold' style={styles.textColor}>Surveyor Email : </Text>
+                      <Text className='text-gray' style={styles.textColor}>{survey?.surveySubmittedUserEmail}</Text>
                     </View>
                     )}
 
                     {survey?.date && (
                     <View style={styles.dataContent}>
-                      <Text className='text-[15px] text-gray font-bold'>Surveyor Date : </Text>
-                      <Text className='text-gray'>{survey?.date}</Text>
+                      <Text className='text-[15px] text-gray font-bold' style={styles.textColor}>Surveyor Date : </Text>
+                      <Text className='text-gray' style={styles.textColor}>{survey?.date}</Text>
                     </View>
                      )}
 
                     {survey?.binHolderName && (
                     <View style={styles.dataContent}>
-                      <Text className='text-[15px] text-gray font-bold'>Bin Holder Name : </Text>
-                      <Text className='text-gray'>{survey?.binHolderName}</Text>
+                      <Text className='text-[15px] text-gray font-bold' style={styles.textColor}>Bin Holder Name : </Text>
+                      <Text className='text-gray' style={styles.textColor}>{survey?.binHolderName}</Text>
                     </View>
                      )}
 
                     {survey?.binHolderMobile && (
                     <View style={styles.dataContent}>
-                      <Text className='text-[15px] text-gray font-bold'>Bin Holder Mobile : </Text>
-                      <Text className='text-gray'>{survey?.binHolderMobile}</Text>
+                      <Text className='text-[15px] text-gray font-bold' style={styles.textColor}>Bin Holder Mobile : </Text>
+                      <Text className='text-gray' style={styles.textColor}>{survey?.binHolderMobile}</Text>
                     </View>
                      )}
 
                     {survey?.binHolderEmail && (
                     <View style={styles.dataContent}>
-                      <Text className='text-[15px] text-gray font-bold'>Bin Holder Email : </Text>
-                      <Text className='text-gray'>{survey?.binHolderEmail}</Text>
+                      <Text className='text-[15px] text-gray font-bold' style={styles.textColor}>Bin Holder Email : </Text>
+                      <Text className='text-gray' style={styles.textColor}>{survey?.binHolderEmail}</Text>
                     </View>
                     )}
 
                     {survey?.binHolderNid && (
                     <View style={styles.dataContent}>
-                      <Text className='text-[15px] text-gray font-bold'>Bin Holder NID : </Text>
-                      <Text className='text-gray'>{survey?.binHolderNid}</Text>
+                      <Text className='text-[15px] text-gray font-bold' style={styles.textColor}>Bin Holder NID : </Text>
+                      <Text className='text-gray' style={styles.textColor}>{survey?.binHolderNid}</Text>
                     </View>
                     )}
 
                     {survey?.binNumber && (
                     <View style={styles.dataContent}>
-                      <Text className='text-[15px] text-gray font-bold'>Bin Number : </Text>
-                      <Text className='text-gray'>{survey?.binNumber}</Text>
+                      <Text className='text-[15px] text-gray font-bold' style={styles.textColor}>Bin Number : </Text>
+                      <Text className='text-gray' style={styles.textColor}>{survey?.binNumber}</Text>
                     </View>
                     )}
 
                     {survey?.commissioneRate && (
                     <View style={styles.dataContent}>
-                      <Text className='text-[15px] text-gray font-bold'>CommissioneRate : </Text>
-                      <Text className='text-gray'>{survey?.commissioneRate}</Text>
+                      <Text className='text-[15px] text-gray font-bold' style={styles.textColor}>CommissioneRate : </Text>
+                      <Text className='text-gray' style={styles.textColor}>{survey?.commissioneRate}</Text>
                     </View>
                      )}
 
                     {survey?.businessStartDate && (
                     <View style={styles.dataContent}>
-                      <Text className='text-[15px] text-gray font-bold'>Business Start Date : </Text>
-                      <Text className='text-gray'>{survey?.businessStartDate}</Text>
+                      <Text className='text-[15px] text-gray font-bold' style={styles.textColor}>Business Start Date : </Text>
+                      <Text className='text-gray' style={styles.textColor}>{survey?.businessStartDate}</Text>
                     </View>
                     )}
 
                     <View style={styles.dataContent}>
-                      <Text className='text-[15px] text-gray font-bold'>Country : </Text>
-                      <Text className='text-gray'>{`Bangladesh`}</Text>
+                      <Text className='text-[15px] text-gray font-bold' style={styles.textColor}>Country : </Text>
+                      <Text className='text-gray' style={styles.textColor}>{`Bangladesh`}</Text>
                     </View>
                     
 
                     {survey?.division && (
                     <View style={styles.dataContent}>
-                      <Text className='text-[15px] text-gray font-bold'>Division : </Text>
-                      <Text className='text-gray'>{survey?.division}</Text>
+                      <Text className='text-[15px] text-gray font-bold' style={styles.textColor}>Division : </Text>
+                      <Text className='text-gray' style={styles.textColor}>{survey?.division}</Text>
                     </View>
                     )}
 
                     {survey?.circle && (
                     <View style={styles.dataContent}>
-                      <Text className='text-[15px] text-gray font-bold'>Circle : </Text>
-                      <Text className='text-gray'>{survey?.circle}</Text>
+                      <Text className='text-[15px] text-gray font-bold' style={styles.textColor}>Circle : </Text>
+                      <Text className='text-gray' style={styles.textColor}>{survey?.circle}</Text>
                     </View>
                     )}
 
                     {survey?.shopName && (
                     <View style={styles.dataContent}>
-                      <Text className='text-[15px] text-gray font-bold'>Shop Name : </Text>
-                      <Text className='text-gray'>{survey?.shopName}</Text>
+                      <Text className='text-[15px] text-gray font-bold' style={styles.textColor}>Shop Name : </Text>
+                      <Text className='text-gray' style={styles.textColor}>{survey?.shopName}</Text>
                     </View>
                     )}
 
                     {survey?.brandName && (
                     <View style={styles.dataContent}>
-                      <Text className='text-[15px] text-gray font-bold'>Brand Name : </Text>
-                      <Text className='text-gray'>{survey?.brandName}</Text>
+                      <Text className='text-[15px] text-gray font-bold' style={styles.textColor}>Brand Name : </Text>
+                      <Text className='text-gray' style={styles.textColor}>{survey?.brandName}</Text>
                     </View>
                     )}
 
                     {survey?.areaOrshoppingMall && (
                     <View style={styles.dataContent}>
-                      <Text className='text-[15px] text-gray font-bold'>Area Or Shopping Mall : </Text>
-                      <Text className='text-gray'>{survey?.areaOrshoppingMall}</Text>
+                      <Text className='text-[15px] text-gray font-bold' style={styles.textColor}>Area Or Shopping Mall : </Text>
+                      <Text className='text-gray' style={styles.textColor}>{survey?.areaOrshoppingMall}</Text>
                     </View>
                     )}
 
                     {survey?.businessRegisteredAddress && (
                     <View style={styles.dataContent}>
-                      <Text className='text-[15px] text-gray font-bold'>Business Registered Address : </Text>
-                      <Text className='text-gray'>{survey?.businessRegisteredAddress}</Text>
+                      <Text className='text-[15px] text-gray font-bold' style={styles.textColor}>Business Registered Address : </Text>
+                      <Text className='text-gray' style={styles.textColor}>{survey?.businessRegisteredAddress}</Text>
                     </View>
                     )}
 
                     {survey?.outletAddress && (
                     <View style={styles.dataContent}>
-                      <Text className='text-[15px] text-gray font-bold'>Outlet Address : </Text>
-                      <Text className='text-gray'>{survey?.outletAddress}</Text>
+                      <Text className='text-[15px] text-gray font-bold' style={styles.textColor}>Outlet Address : </Text>
+                      <Text className='text-gray' style={styles.textColor}>{survey?.outletAddress}</Text>
                     </View>
                     )}
 
 
                     {survey?.category && (
                     <View style={styles.dataContent}>
-                      <Text className='text-[15px] text-gray font-bold'>Category : </Text>
-                      <Text className='text-gray'>{survey?.category}</Text>
+                      <Text className='text-[15px] text-gray font-bold' style={styles.textColor}>Category : </Text>
+                      <Text className='text-gray' style={styles.textColor}>{survey?.category}</Text>
                     </View>
                      )}
 
 
                     {survey?.subCategory && (
                     <View style={styles.dataContent}>
-                      <Text className='text-[15px] text-gray font-bold'>Sub Category : </Text>
-                      <Text className='text-gray'>{survey?.subCategory}</Text>
+                      <Text className='text-[15px] text-gray font-bold' style={styles.textColor}>Sub Category : </Text>
+                      <Text className='text-gray' style={styles.textColor}>{survey?.subCategory}</Text>
                     </View>
                     )}
 
                     {survey?.numberOfOutlet && (
                     <View style={styles.dataContent}>
-                      <Text className='text-[15px] text-gray font-bold'>Number Of Outlet : </Text>
-                      <Text className='text-gray'>{survey?.numberOfOutlet}</Text>
+                      <Text className='text-[15px] text-gray font-bold' style={styles.textColor}>Number Of Outlet : </Text>
+                      <Text className='text-gray' style={styles.textColor}>{survey?.numberOfOutlet}</Text>
                     </View>
                     )}
 
                     {survey?.numberOfCounter && (
                     <View style={styles.dataContent}>
-                      <Text className='text-[15px] text-gray font-bold'>Number Of Counter : </Text>
-                      <Text className='text-gray'>{survey?.numberOfCounter}</Text>
+                      <Text className='text-[15px] text-gray font-bold' style={styles.textColor}>Number Of Counter : </Text>
+                      <Text className='text-gray' style={styles.textColor}>{survey?.numberOfCounter}</Text>
                     </View>
                     )}
 
                     {survey?.differentBin && (
                     <View style={styles.dataContent}>
-                      <Text className='text-[15px] text-gray font-bold'>Different Bin : </Text>
-                      <Text className='text-gray'>{survey?.differentBin}</Text>
+                      <Text className='text-[15px] text-gray font-bold' style={styles.textColor}>Different Bin : </Text>
+                      <Text className='text-gray' style={styles.textColor}>{survey?.differentBin}</Text>
                     </View>
                     )}
 
                     {survey?.transactionType && (
                     <View style={styles.dataContent}>
-                      <Text className='text-[15px] text-gray font-bold'>Transaction Type : </Text>
-                      <Text className='text-gray'>{survey?.transactionType}</Text>
+                      <Text className='text-[15px] text-gray font-bold' style={styles.textColor}>Transaction Type : </Text>
+                      <Text className='text-gray' style={styles.textColor}>{survey?.transactionType}</Text>
                     </View>
                     )}
 
                     {survey?.posSoftwareProvider && (
                     <View style={styles.dataContent}>
-                      <Text className='text-[15px] text-gray font-bold'>POS Software Provider : </Text>
-                      <Text className='text-gray'>{survey?.posSoftwareProvider}</Text>
+                      <Text className='text-[15px] text-gray font-bold' style={styles.textColor}>POS Software Provider : </Text>
+                      <Text className='text-gray' style={styles.textColor}>{survey?.posSoftwareProvider}</Text>
                     </View>
                     )}
 
                     {survey?.nrbApproved && (
                     <View style={styles.dataContent}>
-                      <Text className='text-[15px] text-gray font-bold'>NRB Approved : </Text>
-                      <Text className='text-gray'>{survey?.nrbApproved}</Text>
+                      <Text className='text-[15px] text-gray font-bold' style={styles.textColor}>NRB Approved : </Text>
+                      <Text className='text-gray' style={styles.textColor}>{survey?.nrbApproved}</Text>
                     </View>
                     )}
 
                     {survey?.thirdPartyName && (
                     <View style={styles.dataContent}>
-                      <Text className='text-[15px] text-gray font-bold'>Third Party Name : </Text>
-                      <Text className='text-gray'>{survey?.thirdPartyName}</Text>
+                      <Text className='text-[15px] text-gray font-bold' style={styles.textColor}>Third Party Name : </Text>
+                      <Text className='text-gray' style={styles.textColor}>{survey?.thirdPartyName}</Text>
                     </View>
                     )}
 
                     {survey?.monthlyAverageSales && (
                     <View style={styles.dataContent}>
-                      <Text className='text-[15px] text-gray font-bold'>Monthly Average Sales : </Text>
-                      <Text className='text-gray'>{survey?.monthlyAverageSales}</Text>
+                      <Text className='text-[15px] text-gray font-bold' style={styles.textColor}>Monthly Average Sales : </Text>
+                      <Text className='text-gray' style={styles.textColor}>{survey?.monthlyAverageSales}</Text>
                     </View>
                     )}
 
                     {survey?.monthlyAverageCustomer && (
                     <View style={styles.dataContent}>
-                      <Text className='text-[15px] text-gray font-bold'>Monthly Average Customer : </Text>
-                      <Text className='text-gray'>{survey?.monthlyAverageCustomer}</Text>
+                      <Text className='text-[15px] text-gray font-bold' style={styles.textColor}>Monthly Average Customer : </Text>
+                      <Text className='text-gray' style={styles.textColor}>{survey?.monthlyAverageCustomer}</Text>
                     </View>
                     )}
 
                     {survey?.onlineSaleAvailable && (
                     <View style={styles.dataContent}>
-                      <Text className='text-[15px] text-gray font-bold'>Online Sale Available : </Text>
-                      <Text className='text-gray'>{survey?.onlineSaleAvailable}</Text>
+                      <Text className='text-[15px] text-gray font-bold' style={styles.textColor}>Online Sale Available : </Text>
+                      <Text className='text-gray' style={styles.textColor}>{survey?.onlineSaleAvailable}</Text>
                     </View>
                     )}
 
                     {survey?.onlineSaleParcent && (
                     <View style={styles.dataContent}>
-                      <Text className='text-[15px] text-gray font-bold'>Online Sale Parcent : </Text>
-                      <Text className='text-gray'>{survey?.onlineSaleParcent}</Text>
+                      <Text className='text-[15px] text-gray font-bold' style={styles.textColor}>Online Sale Parcent : </Text>
+                      <Text className='text-gray' style={styles.textColor}>{survey?.onlineSaleParcent}</Text>
                     </View>
                     )}
 
                     {survey?.onlineOrderMode && (
                     <View style={styles.dataContent}>
-                      <Text className='text-[15px] text-gray font-bold'>Online Order Mode : </Text>
-                      <Text className='text-gray'>{survey?.onlineOrderMode}</Text>
+                      <Text className='text-[15px] text-gray font-bold' style={styles.textColor}>Online Order Mode : </Text>
+                      <Text className='text-gray' style={styles.textColor}>{survey?.onlineOrderMode}</Text>
                     </View>
                     )}
 
                     {survey?.productInfo && (
                     <View style={styles.dataContent}>
-                      <Text className='text-[15px] text-gray font-bold'>Product Info : </Text>
-                      <Text className='text-gray'>{survey?.productInfo}</Text>
+                      <Text className='text-[15px] text-gray font-bold' style={styles.textColor}>Product Info : </Text>
+                      <Text className='text-gray' style={styles.textColor}>{survey?.productInfo}</Text>
                     </View>
                     )}
 
                     {survey?.productName && (
                     <View style={styles.dataContent}>
-                      <Text className='text-[15px] text-gray font-bold'>Product Name : </Text>
-                      <Text className='text-gray'>{survey?.productName}</Text>
+                      <Text className='text-[15px] text-gray font-bold' style={styles.textColor}>Product Name : </Text>
+                      <Text className='text-gray' style={styles.textColor}>{survey?.productName}</Text>
                     </View>
                     )}
 
                     {survey?.productUnit && (
                     <View style={styles.dataContent}>
-                      <Text className='text-[15px] text-gray font-bold'>Product Unit : </Text>
-                      <Text className='text-gray'>{survey?.productUnit}</Text>
+                      <Text className='text-[15px] text-gray font-bold' style={styles.textColor}>Product Unit : </Text>
+                      <Text className='text-gray' style={styles.textColor}>{survey?.productUnit}</Text>
                     </View>
                     )}
 
                     {survey?.unitPrice && (
                     <View style={styles.dataContent}>
-                      <Text className='text-[15px] text-gray font-bold'>Unit Price : </Text>
-                      <Text className='text-gray'>{survey?.unitPrice}</Text>
+                      <Text className='text-[15px] text-gray font-bold' style={styles.textColor}>Unit Price : </Text>
+                      <Text className='text-gray' style={styles.textColor}>{survey?.unitPrice}</Text>
                     </View>
                     )}
 
                     {survey?.vatParcent && (
                     <View style={styles.dataContent}>
-                      <Text className='text-[15px] text-gray font-bold'>VAT Parcent : </Text>
-                      <Text className='text-gray'>{survey?.vatParcent}</Text>
+                      <Text className='text-[15px] text-gray font-bold' style={styles.textColor}>VAT Parcent : </Text>
+                      <Text className='text-gray' style={styles.textColor}>{survey?.vatParcent}</Text>
                     </View>
                     )}
 
                     {survey?.sdPercent && (
                     <View style={styles.dataContent}>
-                      <Text className='text-[15px] text-gray font-bold'>SD Percent : </Text>
-                      <Text className='text-gray'>{survey?.sdPercent}</Text>
+                      <Text className='text-[15px] text-gray font-bold' style={styles.textColor}>SD Percent : </Text>
+                      <Text className='text-gray' style={styles.textColor}>{survey?.sdPercent}</Text>
                     </View>
                     )}
 
                     {survey?.priceIncludingVat && (
                     <View style={styles.dataContent}>
-                      <Text className='text-[15px] text-gray font-bold'>Price Including VAT : </Text>
-                      <Text className='text-gray'>{survey?.priceIncludingVat}</Text>
+                      <Text className='text-[15px] text-gray font-bold' style={styles.textColor}>Price Including VAT : </Text>
+                      <Text className='text-gray' style={styles.textColor}>{survey?.priceIncludingVat}</Text>
                     </View>
                     )}
 
                     {survey?.priceExcludingVat && (
                     <View style={styles.dataContent}>
-                      <Text className='text-[15px] text-gray font-bold'>Price Excluding VAT : </Text>
-                      <Text className='text-gray'>{survey?.priceExcludingVat}</Text>
+                      <Text className='text-[15px] text-gray font-bold' style={styles.textColor}>Price Excluding VAT : </Text>
+                      <Text className='text-gray' style={styles.textColor}>{survey?.priceExcludingVat}</Text>
                     </View>
                     )}
 
                     {survey?.stockKeeping && (
                     <View style={styles.dataContent}>
-                      <Text className='text-[15px] text-gray font-bold'>Stock Keeping : </Text>
-                      <Text className='text-gray'>{survey?.stockKeeping}</Text>
+                      <Text className='text-[15px] text-gray font-bold' style={styles.textColor}>Stock Keeping : </Text>
+                      <Text className='text-gray' style={styles.textColor}>{survey?.stockKeeping}</Text>
                     </View>
                     )}
 
                     {survey?.posSoftware && (
                     <View style={styles.dataContent}>
-                      <Text className='text-[15px] text-gray font-bold'>POS Software : </Text>
-                      <Text className='text-gray'>{survey?.posSoftware}</Text>
+                      <Text className='text-[15px] text-gray font-bold' style={styles.textColor}>POS Software : </Text>
+                      <Text className='text-gray' style={styles.textColor}>{survey?.posSoftware}</Text>
                     </View>
                     )}
 
                     {survey?.posPrinter && (
                     <View style={styles.dataContent}>
-                      <Text className='text-[15px] text-gray font-bold'>POS Printer : </Text>
-                      <Text className='text-gray'>{survey?.posPrinter}</Text>
+                      <Text className='text-[15px] text-gray font-bold' style={styles.textColor}>POS Printer : </Text>
+                      <Text className='text-gray' style={styles.textColor}>{survey?.posPrinter}</Text>
                     </View>
                     )}
 
                     {survey?.pcOrLaptop && (
                     <View style={styles.dataContent}>
-                      <Text className='text-[15px] text-gray font-bold'>PC Or Laptop : </Text>
-                      <Text className='text-gray'>{survey?.pcOrLaptop}</Text>
+                      <Text className='text-[15px] text-gray font-bold' style={styles.textColor}>PC Or Laptop : </Text>
+                      <Text className='text-gray' style={styles.textColor}>{survey?.pcOrLaptop}</Text>
                     </View>
                     )}
 
                     {survey?.mushak && (
                     <View style={styles.dataContent}>
-                      <Text className='text-[15px] text-gray font-bold'>Mushak : </Text>
-                      <Text className='text-gray'>{survey?.mushak}</Text>
+                      <Text className='text-[15px] text-gray font-bold' style={styles.textColor}>Mushak : </Text>
+                      <Text className='text-gray' style={styles.textColor}>{survey?.mushak}</Text>
                     </View>
                     )}
 
                     {survey?.router && (
                     <View style={styles.dataContent}>
-                      <Text className='text-[15px] text-gray font-bold'>Router : </Text>
-                      <Text className='text-gray'>{survey?.router}</Text>
+                      <Text className='text-[15px] text-gray font-bold' style={styles.textColor}>Router : </Text>
+                      <Text className='text-gray' style={styles.textColor}>{survey?.router}</Text>
                     </View>
                     )}
 
                     {survey?.networking && (
                     <View style={styles.dataContent}>
-                      <Text className='text-[15px] text-gray font-bold'>Networking : </Text>
-                      <Text className='text-gray'>{survey?.networking}</Text>
+                      <Text className='text-[15px] text-gray font-bold' style={styles.textColor}>Networking : </Text>
+                      <Text className='text-gray' style={styles.textColor}>{survey?.networking}</Text>
                     </View>
                     )}
 
                     {survey?.surveillance && (
                     <View style={styles.dataContent}>
-                      <Text className='text-[15px] text-gray font-bold'>Surveillance : </Text>
-                      <Text className='text-gray'>{survey?.surveillance}</Text>
+                      <Text className='text-[15px] text-gray font-bold' style={styles.textColor}>Surveillance : </Text>
+                      <Text className='text-gray' style={styles.textColor}>{survey?.surveillance}</Text>
                     </View>
                     )}
 
                     {survey?.mobileOperator && (
                     <View style={styles.dataContent}>
-                      <Text className='text-[15px] text-gray font-bold'>Mobile Operator : </Text>
-                      <Text className='text-gray'>{survey?.mobileOperator}</Text>
+                      <Text className='text-[15px] text-gray font-bold' style={styles.textColor}>Mobile Operator : </Text>
+                      <Text className='text-gray' style={styles.textColor}>{survey?.mobileOperator}</Text>
                     </View>
                     )}
 
                     {survey?.operatorCoverage && (
                     <View style={styles.dataContent}>
-                      <Text className='text-[15px] text-gray font-bold'>Operator Coverage : </Text>
-                      <Text className='text-gray'>{survey?.operatorCoverage}</Text>
+                      <Text className='text-[15px] text-gray font-bold' style={styles.textColor}>Operator Coverage : </Text>
+                      <Text className='text-gray' style={styles.textColor}>{survey?.operatorCoverage}</Text>
                     </View>
                     )}
 
                     {survey?.weeklyHoliday && (
                     <View style={styles.dataContent}>
-                      <Text className='text-[15px] text-gray font-bold'>WeeklyHoliday : </Text>
-                      <Text className='text-gray'>{survey?.weeklyHoliday}</Text>
+                      <Text className='text-[15px] text-gray font-bold' style={styles.textColor}>WeeklyHoliday : </Text>
+                      <Text className='text-gray' style={styles.textColor}>{survey?.weeklyHoliday}</Text>
                     </View>
                     )}
 
                     {survey?.shopPic && (
                     <View>
-                      <Text className='text-[15px] text-gray font-bold'>Shop Image : </Text>
+                      <Text className='text-[15px] text-gray font-bold' style={styles.textColor}>Shop Image : </Text>
                       <Image
                         source={{uri: IMGAPI + survey?.shopPic}}
                         className="h-[300px] w-full mt-4"
@@ -467,7 +468,7 @@ const SurveyDetails = ({ route, user, setUser }) => {
 
                     {survey?.binCertificate && (
                     <View>
-                      <Text className='text-[15px] text-gray font-bold mt-3'>BIN Certificate : </Text>
+                      <Text className='text-[15px] text-gray font-bold mt-3' style={styles.textColor}>BIN Certificate : </Text>
                       <Image
                         source={{uri: IMGAPI + survey?.binCertificate}}
                         className="h-[300px] w-full mt-4"
@@ -478,7 +479,7 @@ const SurveyDetails = ({ route, user, setUser }) => {
 
                     {survey?.serveyItemList && (
                     <View>
-                      <Text className='text-[15px] text-gray font-bold mt-3'>Item Images : </Text>
+                      <Text className='text-[15px] text-gray font-bold mt-3' style={styles.textColor}>Item Images : </Text>
                       {survey?.serveyItemList.map((item, index) => (
                         <Image
                           key={index} 
@@ -556,6 +557,9 @@ const styles = StyleSheet.create({
     flex:1, 
     flexDirection: 'row',
     marginBottom: 7
+  },
+  textColor: {
+    color: 'gray'
   }
 });
 

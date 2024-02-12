@@ -155,11 +155,13 @@ const styles = StyleSheet.create({
     fontSize: 16,
     flex: 1,
     textAlign: 'center',
+    color: 'gray'
   },
   cell: {
     fontSize: 14,
     flex: 1,
     textAlign: 'center',
+    color: 'gray'
   },
 });
 

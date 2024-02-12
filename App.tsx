@@ -20,6 +20,7 @@ import Surveys from './screens/Surveys';
 import SurveyDetails from './screens/SurveyDetails';
 import Notifications from './screens/Notifications';
 import NotificationDetails from './screens/NotificationDetails';
+import ChangePassword from './screens/ChangePassword';
 
 const Stack = createNativeStackNavigator<RootParamList>();
 
@@ -132,6 +133,9 @@ export default function App() {
               </Stack.Screen>
               <Stack.Screen name="profile" options={{headerShown: false}}>
                 {props => <Profile {...props} user={user} setUser={setUser} />}
+              </Stack.Screen>
+              <Stack.Screen name="changePassword" options={{headerShown: false}}>
+                {props => <ChangePassword {...props} user={user} setUser={setUser} />}
               </Stack.Screen>
               <Stack.Screen name="surveys" options={{headerShown: false}}>
                 {props => <Surveys {...props} user={user} setUser={setUser} />}

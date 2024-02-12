@@ -108,6 +108,7 @@ export const circle: sampleDataType = {
     {label: 'Rayerbazar', value: 'Rayerbazar'},
     {label: 'Kalabagan', value: 'Kalabagan'},
     {label: 'Nilkhet', value: 'Nilkhet'},
+    {label: 'Kathalbagan', value: 'Kathalbagan'},
   ],
   'Motijheel-0202': [
     {label: 'Motijheel', value: 'Motijheel'},
@@ -205,6 +206,7 @@ export const circle: sampleDataType = {
     {label: 'Kazipara', value: 'Kazipara'},
     {label: 'Kafrul', value: 'Kafrul'},
     {label: 'Kallyanpur', value: 'Kallyanpur'},
+    {label: 'Shahali', value: 'Shahali'},
   ],
   'Mohammadpur-0402': [
     {label: 'Mohammadpur', value: 'Mohammadpur'},

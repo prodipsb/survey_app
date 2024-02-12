@@ -1,6 +1,7 @@
 import {type} from 'os';
 
 export interface UserResponse {
+  employee_id: number;
   id: number;
   name: string;
   email: string;

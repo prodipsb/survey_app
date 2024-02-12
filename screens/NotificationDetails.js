@@ -72,41 +72,41 @@ const NotificationDetails = ({ route, user, setUser }) => {
                  <View style={{marginTop:10, marginBottom:50}}>
                   <View>
                     <View style={styles.dataContent}>
-                      <Text className='text-[15px] text-gray font-bold'>Date : </Text>
-                      <Text className='text-gray'>{notification?.created_at}</Text>
+                      <Text className='text-[15px] text-gray font-bold' style={styles.textColor}>Date : </Text>
+                      <Text className='text-gray' style={styles.textColor}>{notification?.created_at}</Text>
                     </View>
 
                     <View style={styles.dataContent}>
-                      <Text className='text-[15px] text-gray font-bold'>Title : </Text>
-                      <Text className='text-gray'>{notification?.message_title}</Text>
+                      <Text className='text-[15px] text-gray font-bold' style={styles.textColor}>Title : </Text>
+                      <Text className='text-gray' style={styles.textColor}>{notification?.message_title}</Text>
                     </View>
 
                     <View style={styles.dataContent}>
-                      <Text className='text-[15px] text-gray font-bold'>Message : </Text>
-                      <Text className='text-gray'>{notification?.message}</Text>
+                      <Text className='text-[15px] text-gray font-bold' style={styles.textColor}>Message : </Text>
+                      <Text className='text-gray' style={styles.textColor}>{notification?.message}</Text>
                     </View>
 
                     <View style={styles.dataContent}>
-                      <Text className='text-[15px] text-gray font-bold'>Sender  : </Text>
-                      <Text className='text-gray'>{notification?.sender_name}</Text>
+                      <Text className='text-[15px] text-gray font-bold' style={styles.textColor}>Sender  : </Text>
+                      <Text className='text-gray' style={styles.textColor}>{notification?.sender_name}</Text>
                     </View>
 
                     <View style={styles.dataContent}>
-                      <Text className='text-[15px] text-gray font-bold'>Receiver  : </Text>
-                      <Text className='text-gray'>{notification?.receiver_name}</Text>
+                      <Text className='text-[15px] text-gray font-bold' style={styles.textColor}>Receiver  : </Text>
+                      <Text className='text-gray' style={styles.textColor}>{notification?.receiver_name}</Text>
                     </View>
 
 
                     <View style={styles.dataContent}>
-                      <Text className='text-[15px] text-gray font-bold'>Notification Read : </Text>
-                      <Text className='text-gray'>{notification?.read}</Text>
+                      <Text className='text-[15px] text-gray font-bold' style={styles.textColor}>Notification Read : </Text>
+                      <Text className='text-gray' style={styles.textColor}>{notification?.read}</Text>
                     </View>
 
                     {notification?.read_at && (
 
                       <View style={styles.dataContent}>
-                      <Text className='text-[15px] text-gray font-bold'>Notification Read At : </Text>
-                      <Text className='text-gray'>{notification?.read_at}</Text>
+                      <Text className='text-[15px] text-gray font-bold' style={styles.textColor}>Notification Read At : </Text>
+                      <Text className='text-gray' style={styles.textColor}>{notification?.read_at}</Text>
                       </View>
                     )}
                   </View>
@@ -145,6 +145,9 @@ const styles = StyleSheet.create({
     flex:1, 
     flexDirection: 'row',
     marginBottom: 7
+  },
+  textColor: {
+    color: 'gray'
   }
 });
 
