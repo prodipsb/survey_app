@@ -190,11 +190,11 @@ const Form1: React.FC<FormType> = ({preview, dispatch, state, errorData}) => {
       <View className="w-full mb-3 mt-5">
         <TextComponent
           style="text-[18px] text-black"
-          content="BIN holder's NID"
+          content="BIN Holder's NID"
         />
         <InputComponent
           style="text-[18px] text-black border-b"
-          placeholder="12345436"
+          placeholder="Enter NID number"
           handleChange={dispatch}
           name="binHolderNid"
           defaultValue={state.binHolderNid}
