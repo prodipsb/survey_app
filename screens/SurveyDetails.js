@@ -275,7 +275,7 @@ const SurveyDetails = ({ route, user, setUser }) => {
 
                     {survey?.nrbApproved && (
                     <View style={styles.dataContent}>
-                      <Text className='text-[15px] text-gray font-bold' style={styles.textColor}>NRB Approved : </Text>
+                      <Text className='text-[15px] text-gray font-bold' style={styles.textColor}>NBR Approved : </Text>
                       <Text className='text-gray' style={styles.textColor}>{survey?.nrbApproved}</Text>
                     </View>
                     )}

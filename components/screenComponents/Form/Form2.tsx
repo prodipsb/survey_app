@@ -178,7 +178,7 @@ const Form2: React.FC<FormType> = ({state, dispatch, preview, errorData}) => {
         <View className="w-full mt-5 mb-3">
           <TextComponent
             style="text-[18px] text-black"
-            content="NRB approved"
+            content="NBR approved"
           />
           <DropdownComponents
             defaultValue={state.nrbApproved}
@@ -213,7 +213,7 @@ const Form2: React.FC<FormType> = ({state, dispatch, preview, errorData}) => {
           <View className="w-full mt-5 mb-3">
             <TextComponent
               style="text-[18px] text-black"
-              content="NRB approved"
+              content="NBR approved"
             />
             <DropdownComponents
               defaultValue={state.nrbApproved}
